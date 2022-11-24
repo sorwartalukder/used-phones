@@ -3,8 +3,8 @@ import phones from '../../../assets/Images/banner image.jpg'
 
 const HomeAbout = () => {
     return (
-        <div className='py-24 my-20 bg-slate-100' >
-            <div className=" text-black rounded-lg ">
+        <div className='py-24 my-20 bg-white max-w-[1440px] mx-auto' >
+            <div className=" text-black rounded-lg">
                 <div className="hero-content flex-col lg:flex-row ">
                     <div>
                         <h2
