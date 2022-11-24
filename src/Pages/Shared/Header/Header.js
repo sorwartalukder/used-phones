@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import PrimaryBtn from '../../../components/AllButton/PrimaryBtn';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext)
 
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(e => console.error(e))
+    }
 
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
@@ -30,7 +38,16 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {/* <a className="btn">Get started</a> */}
+                    {
+                        user ?
+                            <button
+                                onClick={handleLogOut}
+                                className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">Log out</button>
+                            :
+                            <PrimaryBtn>
+                                <Link to='/login'>Log In</Link>
+                            </PrimaryBtn>
+                    }
                 </div>
             </div>
         </div>
