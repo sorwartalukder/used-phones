@@ -8,11 +8,14 @@ const AddProduct = () => {
     const { user } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit } = useForm();
     const imageHostKey = process.env.REACT_APP_imgbb_key;
-
+    //date and time
     const currentDate = new Date();
     const time = (currentDate.getHours() + ':' + currentDate.getMinutes())
     const date = format(currentDate, 'PP');
+
+    //add product
     const handleAddProduct = data => {
+        //image hosting
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
@@ -23,8 +26,11 @@ const AddProduct = () => {
         })
             .then((res) => res.json())
             .then((imgData) => {
+                console.log(imgData)
+
                 if (imgData.success) {
                     const { productName, resalePrice, originalPrice, yearOfPurchase, category, condition, location, phone, description, relevantInformation } = data;
+
                     // product data 
                     const product = {
                         sellerName: user.displayName,
