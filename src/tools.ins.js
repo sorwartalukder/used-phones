@@ -6,4 +6,5 @@
  * 5. firebase
  * 6. React hook form
  * 7. React hot toast
+ * 8. React query
 */

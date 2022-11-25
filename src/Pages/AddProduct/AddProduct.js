@@ -2,7 +2,6 @@ import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import Loading from '../../components/Loading/Loading';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const AddProduct = () => {
