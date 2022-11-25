@@ -9,6 +9,7 @@ const SignUp = () => {
     const [signUpError, setSignUpError] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate()
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
 
     // create user
     const handleUserCreate = data => {
@@ -17,16 +18,31 @@ const SignUp = () => {
             .then((result) => {
                 toast.success('Account Created Successfully.')
                 const user = result.user;
-                const userInfo = {
-                    displayName: data.name
-                }
-                // update user
-                updateUserProfile(userInfo)
-                    .then(() => {
-                        // user save database function call
-                        saveUserDatabase(data.accountType, user.displayName, user.email)
+                //store image
+                const image = data.image[0];
+                const formData = new FormData();
+                formData.append('image', image);
+                const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+                fetch(url, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then((res) => res.json())
+                    .then(imgData => {
+                        const userInfo = {
+                            displayName: data.name,
+                            photoURL: imgData.data.url
+                        }
+                        // update user
+                        updateUserProfile(userInfo)
+                            .then(() => {
+                                // user save database function call
+                                saveUserDatabase(data.accountType, user.displayName, user.email)
+                            })
+                            .catch(e => console.error(e))
+
                     })
-                    .catch(e => console.error(e))
+
             })
             .catch((error) => {
                 const errorMessage = error.message;
@@ -118,18 +134,19 @@ const SignUp = () => {
                         {signUpError && <p className='text-red-600'>{signUpError}</p>}
                     </div>
 
-                    {/* Photo field */}
-                    {/* <div className="form-control w-full max-w-xs">
-                        <label className="label"><span className="label-text">Upload profile picture</span></label>
+                    {/* image  */}
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"><span className="label-text">Photo</span></label>
                         <input
                             type="file"
                             className="input input-bordered w-full max-w-xs"
-                            {...register("photoURL", {
-                                required: 'photo is required'
+                            {...register("image", {
+                                required: 'image is required'
                             })}
                         />
-                        {errors.photoURL && <p className='text-red-600'>{errors.photoURL?.message}</p>}
-                    </div> */}
+                        {errors.image && <p className='text-red-600'>{errors.image?.message}</p>}
+
+                    </div>
                     <input className='btn btn-primary bg-gradient-to-r from-primary to-secondary text-white w-full mt-4' value='sign up' type="submit" />
                 </form>
                 {/* go to login page  */}

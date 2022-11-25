@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
@@ -11,6 +11,8 @@ const Login = () => {
     const [loginError, setLoginError] = useState('')
     const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
 
     const handleLogin = data => {
         setLoginError('')
@@ -18,7 +20,7 @@ const Login = () => {
             .then((result) => {
                 toast.success('Log In Successfully.')
                 // const user = result.user;
-                navigate('/')
+                navigate(from, { replace: true })
             })
             .catch((error) => {
                 const errorMessage = error.message;
@@ -30,14 +32,31 @@ const Login = () => {
     const handleLoginWithGoogle = () => {
         loginWithGoogle(googleProvider)
             .then((result) => {
-                // const user = result.user;
+                const user = result.user;
+                saveUserDatabase('Buyer', user.displayName, user.email)
                 toast.success('Log In Successfully.')
-                navigate('/')
+                navigate(from, { replace: true })
             }).catch((error) => {
                 const errorMessage = error.message;
                 toast.error(errorMessage)
             });
 
+    }
+
+    const saveUserDatabase = (role, name, email) => {
+        const user = { role, name, email }
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                navigate('/')
+                console.log(data)
+            })
     }
 
     const accountTypes = ['Seller', 'Buyer', 'Admin']

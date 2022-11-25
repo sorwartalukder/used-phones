@@ -1,18 +1,76 @@
-import React from 'react';
+import { format } from 'date-fns';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import Loading from '../../components/Loading/Loading';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const AddProduct = () => {
+    const { user } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
 
+    const currentDate = new Date();
+    const time = (currentDate.getHours() + ':' + currentDate.getMinutes())
+    const date = format(currentDate, 'PP');
     const handleAddProduct = data => {
-        console.log(data)
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then((res) => res.json())
+            .then((imgData) => {
+                if (imgData.success) {
+                    const { productName, resalePrice, originalPrice, yearOfPurchase, category, condition, location, phone, description, relevantInformation } = data;
+                    // product data 
+                    const product = {
+                        sellerName: user.displayName,
+                        email: user.email,
+                        productName,
+                        image: imgData.data.url,
+                        resalePrice,
+                        originalPrice,
+                        yearOfPurchase,
+                        category,
+                        condition,
+                        location,
+                        phone,
+                        description,
+                        relevantInformation,
+                        time,
+                        date
+                    }
+                    fetch('http://localhost:5000/products', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(product)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result)
+                            if (result.acknowledged) {
+                                toast.success(`${user.displayName} product added successfully`)
+                            }
+                        })
+
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
-    // post date time and image upload
-    const categories = ['iphone', 'xiaomi', 'opp']
+
+    const categories = ['iphone', 'xiaomi', 'oppo']
     const condition = ['excellent', 'good', 'fair']
     const locations = ['Dhaka', 'Chattogram', 'Sylhet', 'Rajshahi', 'Rangpur', 'Mymensingh', 'Barishal', 'Khulna']
     return (
-        <div className='max-w-[1440px] mx-auto my-14'>
+        <div className='max-w-[1440px] min-h-screen mx-auto my-14'>
             <div className='p-7'>
                 <h2 className="text-4xl">Add A Product</h2>
                 <form onSubmit={handleSubmit(handleAddProduct)}>
@@ -51,7 +109,7 @@ const AddProduct = () => {
                             <input
                                 type="text"
                                 className="input input-bordered w-full max-w-xs"
-                                {...register(" originalPrice", {
+                                {...register("originalPrice", {
                                     required: ' original price is required'
 
                                 })}
@@ -161,8 +219,8 @@ const AddProduct = () => {
                             ></textarea>
                             {errors.relevantInformation && <p className='text-red-600'>{errors.relevantInformation?.message}</p>}
                         </div>
-
-                        {/* <div className="form-control w-full max-w-xs">
+                        {/* image  */}
+                        <div className="form-control w-full max-w-xs">
                             <label className="label"><span className="label-text">Photo</span></label>
                             <input
                                 type="file"
@@ -171,9 +229,9 @@ const AddProduct = () => {
                                     required: 'image is required'
                                 })}
                             />
-                            {errors.img && <p className='text-red-600'>{errors.img?.message}</p>}
+                            {errors.image && <p className='text-red-600'>{errors.image?.message}</p>}
 
-                        </div> */}
+                        </div>
                     </div>
                     <input className='btn btn-accent max-w-xs mt-4' value='Add Product' type="submit" />
                 </form>
