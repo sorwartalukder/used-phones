@@ -41,7 +41,6 @@ const MyProducts = () => {
                     toast.success('Start advertising.')
                     refetch()
                 }
-                console.log(data.modifiedCount)
             })
     }
     // product delete handler 

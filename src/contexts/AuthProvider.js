@@ -9,6 +9,7 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
+    const [userRole, setUserRole] = useState(null)
 
     const createUser = (email, password) => {
         setLoading(true)
@@ -27,6 +28,7 @@ const AuthProvider = ({ children }) => {
 
     const logOut = () => {
         setLoading(true)
+        setUserRole(null)
         return signOut(auth)
     }
 
@@ -46,6 +48,8 @@ const AuthProvider = ({ children }) => {
     const authInfo = {
         user,
         loading,
+        userRole,
+        setUserRole,
         createUser,
         logIn,
         loginWithGoogle,

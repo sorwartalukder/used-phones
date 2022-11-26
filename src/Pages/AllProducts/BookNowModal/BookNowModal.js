@@ -1,53 +1,61 @@
-import React from 'react';
-import { FaCheckCircle, FaUser } from 'react-icons/fa';
+import React, { useContext } from 'react';
 import 'react-photo-view/dist/react-photo-view.css';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
-    const { sellerName, sellerImage, productName, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = bookProduct;
+    const { user } = useContext(AuthContext)
+    const { productName, resalePrice } = bookProduct;
     return (
         <div>
             <input type="checkbox" id="book-now" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box">
-                    <div className="card bg-base-100 border shadow-xl h-full" >
-                        <div className="card-body">
-                            <div className='flex items-center'>
-                                <div className="avatar">
-                                    <div className="w-8 rounded-full ring ring-primary">
-                                        {
-                                            sellerImage ?
-                                                <img src={sellerImage} alt='' />
-                                                :
-                                                <p className='text-4xl'><FaUser /></p>
-                                        }
-                                    </div>
-                                    <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
-                                </div>
-                                <h4 className='text-xl font-bold ml-1'>{sellerName}</h4>
-                            </div>
-                            <p><small>{date} ({time})</small></p>
-                            <h2 className="card-title">
-                                {productName}
-                            </h2>
-                            <p className='font-semibold'>Location: {location}</p>
-                            <p className='font-semibold'>Condition: {condition}</p>
-                            <p className='font-semibold'>Purchase Year: {yearOfPurchase}</p>
-                            <p>{description}</p>
-                            <h4 className="card-title">Resale Price:<span style={{ color: 'darkorange' }}>{resalePrice} TK</span></h4>
-                            <h4 className="card-title">Original Price: {originalPrice} TK</h4>
-                            <p className='font-semibold'>Mobile Number: {phone}</p>
+                    <form >
+                        {/* name field  */}
+                        <div className=" flex  font-bold text-lg">
+                            <label className="label"><span className="label-text">Your Name: </span></label>
+                            <input disabled
+                                defaultValue={user.displayName}
+                                type="text"
+
+                            />
+
                         </div>
-                    </div>
-                    {/* btns div */}
-                    <div className="modal-action">
-                        <label
-                            onClick={() => handleBooking(bookProduct)}
-                            htmlFor="book-now" className="btn">Submit</label>
-                        <label onClick={closeModal} className="btn">Cancel</label>
-                    </div>
+                        {/* email field  */}
+                        <div className=" flex  mt-4 font-bold text-lg">
+                            <label className="label"><span className="label-text">Your Email: </span></label>
+                            <input disabled
+                                defaultValue={user.email}
+                                type="text" />
+                        </div>
+                        {/* product name field  */}
+                        <div className=" flex  mt-4 font-bold text-lg">
+                            <label className="label"><span className="label-text">Product Name: </span></label>
+                            <input disabled
+                                defaultValue={productName}
+                                type="text" />
+                        </div>
+                        {/* price field  */}
+                        <div className=" flex  mt-4 font-bold text-lg">
+                            <label className="label"><span className="label-text">price: </span></label>
+                            <input disabled
+
+                                defaultValue={resalePrice}
+                                type="text" />
+                        </div>
+                        {/* buttons div */}
+                        <div className="modal-action">
+                            <label
+                                type="submit"
+                                onClick={() => handleBooking(bookProduct)}
+                                htmlFor="book-now" className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white "
+                            >Submit</label>
+                            <label onClick={closeModal} className="btn">Cancel</label>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

@@ -3,15 +3,11 @@ import { FaCheckCircle, FaUser } from 'react-icons/fa';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
-const Product = ({ product, handleAdvertise, setDeletingProduct }) => {
-    const { _id, sellerName, sellerImage, productName, image,
-        originalPrice, location, condition, date, description,
-        resalePrice, yearOfPurchase, time, advertise } = product;
-
-
+const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
+    const { sellerName, sellerImage, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = advertisedProduct;
     return (
         <div>
-            <div className="card bg-base-100 border shadow-xl" >
+            <div className="card bg-base-100 border shadow-xl h-full" >
 
                 <PhotoProvider >
                     <PhotoView src={image}>
@@ -45,30 +41,17 @@ const Product = ({ product, handleAdvertise, setDeletingProduct }) => {
                     <p className='font-semibold'>Purchase Year: {yearOfPurchase}</p>
                     <p>{description.slice(0, 97
                     )}...</p>
-                    <div>
-                        <h4 className="card-title">Resale Price:<span style={{ color: 'darkorange' }}>{resalePrice} TK</span></h4>
-                        <h4 className="card-title">Original Price: {originalPrice} TK</h4>
-                    </div>
+                    <h4 className="card-title">Resale Price:<span style={{ color: 'darkorange' }}>{resalePrice} TK</span></h4>
+                    <h4 className="card-title">Original Price: {originalPrice} TK</h4>
+                    <p className='font-semibold'>Mobile Number: {phone}</p>
                     <div className="card-actions justify-between">
-                        {
-                            advertise ?
-                                <button
-                                    // onClick={() => handleAdvertise(_id)}
-                                    className="badge badge-outline px-5 text-red-500">
-                                    Off Advertise
-                                </button>
-                                :
-                                <button
-                                    onClick={() => handleAdvertise(_id)}
-                                    className="badge badge-outline px-5 text-blue-900">
-                                    Advertise
-                                </button>
-                        }
+                        <button className="badge badge-outline px-5 text-blue-900">
+                            Details</button>
+
                         <label
-                            htmlFor="confirmation-modal"
-                            onClick={() => setDeletingProduct(product)}
-                            className="badge badge-outline px-5 text-blue-900 "
-                        >Delete</label>
+                            htmlFor="book-now"
+                            onClick={() => setBookProduct(advertisedProduct)}
+                            className="badge badge-outline px-5 text-blue-900 ">Book now</label>
                     </div>
                 </div>
             </div>
@@ -76,4 +59,4 @@ const Product = ({ product, handleAdvertise, setDeletingProduct }) => {
     );
 };
 
-export default Product;
+export default AdvertisedProduct;

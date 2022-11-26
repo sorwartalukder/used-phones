@@ -1,18 +1,22 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useLoaderData, useNavigation } from 'react-router-dom';
 import Loading from '../../../components/Loading/Loading';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import BookNowModal from '../BookNowModal/BookNowModal';
-import CategoryProduct from './CategoryProduct';
+import BookNowModal from '../../AllProducts/BookNowModal/BookNowModal';
+import AdvertisedProduct from './AdvertisedProduct';
 
-const CategoryProducts = () => {
-    const categoryProducts = useLoaderData()
-    const [allCategoryProducts, setAllCategoryProducts] = useState(categoryProducts)
-    const [bookProduct, setBookProduct] = useState(null)
+const AdvertisedProducts = () => {
     const { user } = useContext(AuthContext)
-    const navigation = useNavigation();
-
+    const [bookProduct, setBookProduct] = useState(null)
+    const { data: advertisedProducts = [], isLoading, refetch } = useQuery({
+        queryKey: ['advertised-products'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/products/advertise');
+            const data = res.json();
+            return data
+        }
+    })
 
     //booking modal close handle
     const closeModal = () => {
@@ -30,30 +34,29 @@ const CategoryProducts = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
+                    refetch()
                     toast.success(`${user.displayName} ${bookProduct.productName} is booked for you`)
-                    const remaing = categoryProducts.filter(categoryProduct => categoryProduct._id !== bookProduct._id)
-                    setAllCategoryProducts(remaing)
-
                 }
             })
     }
-    //data loading spinner
-    if (navigation.state === "loading") {
+    // products loading spinner 
+    if (isLoading) {
         return <Loading></Loading>
     }
-
     return (
-        <div className='max-w-[1440px] min-h-screen mx-auto my-14'>
-            <h1 className='text-center text-4xl mt-8 py-4'>Total Products: {categoryProducts.length}</h1>
+        <div className='max-w-[1440px] mx-auto my-16'>
+            <h2 className='text-center font-bold text-4xl my-6'>Advertised Products</h2>
 
+            {/* advertised products  */}
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-20  mx-9 lg:mx-0'>
                 {
-                    allCategoryProducts.map(product => <CategoryProduct
-                        key={product._id}
-                        product={product}
+                    advertisedProducts.map(advertisedProduct => <AdvertisedProduct
+                        key={advertisedProduct._id}
+                        advertisedProduct={advertisedProduct}
                         setBookProduct={setBookProduct}
                     >
-                    </CategoryProduct>)
+
+                    </AdvertisedProduct>)
                 }
             </div>
             {
@@ -62,10 +65,11 @@ const CategoryProducts = () => {
                     bookProduct={bookProduct}
                     closeModal={closeModal}
                 >
+
                 </BookNowModal>
             }
         </div>
     );
 };
 
-export default CategoryProducts;
+export default AdvertisedProducts;
