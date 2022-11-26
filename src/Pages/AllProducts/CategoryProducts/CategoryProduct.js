@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
-import { FaCheck, FaCheckCircle, FaUser } from 'react-icons/fa';
+import React from 'react';
+import { FaCheckCircle, FaUser } from 'react-icons/fa';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
-import { AuthContext } from '../../../contexts/AuthProvider';
 
-const CategoryProduct = ({ product }) => {
-    const { user } = useContext(AuthContext)
+const CategoryProduct = ({ product, setBookProduct }) => {
     const { sellerName, sellerImage, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = product;
     return (
         <div className="card bg-base-100 border shadow-xl h-full" >
@@ -49,7 +47,10 @@ const CategoryProduct = ({ product }) => {
                     <button className="badge badge-outline px-5 text-blue-900">
                         Details</button>
 
-                    <button className="badge badge-outline px-5 text-blue-900 ">Book now</button>
+                    <label
+                        htmlFor="book-now"
+                        onClick={() => setBookProduct(product)}
+                        className="badge badge-outline px-5 text-blue-900 ">Book now</label>
                 </div>
             </div>
         </div>
