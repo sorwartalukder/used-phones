@@ -67,7 +67,7 @@ const SignUp = () => {
             })
     }
     //account type
-    const accountTypes = ['Seller', 'Buyer']
+    const accountTypes = ['Buyer', 'Seller']
     return (
         <section className='min-h-screen flex justify-center items-center my-12'>
             <div className='w-96 p-7 shadow-2xl rounded-lg'>

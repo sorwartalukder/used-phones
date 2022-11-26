@@ -27,13 +27,13 @@ const AddProduct = () => {
             .then((res) => res.json())
             .then((imgData) => {
                 console.log(imgData)
-
                 if (imgData.success) {
                     const { productName, resalePrice, originalPrice, yearOfPurchase, category, condition, location, phone, description, relevantInformation } = data;
 
                     // product data 
                     const product = {
                         sellerName: user.displayName,
+                        sellerImage: user.photoURL,
                         email: user.email,
                         productName,
                         image: imgData.data.url,

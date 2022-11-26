@@ -59,7 +59,7 @@ const Login = () => {
             })
     }
 
-    const accountTypes = ['Seller', 'Buyer', 'Admin']
+    const accountTypes = ['Buyer', 'Seller', 'Admin']
     return (
         <section className='min-h-screen py-14 flex justify-center items-center'>
             <div className='w-96 p-7 shadow-2xl rounded-lg'>

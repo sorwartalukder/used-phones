@@ -1,9 +1,14 @@
 import React from 'react';
+import { FaCheckCircle, FaUser } from 'react-icons/fa';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
-const Product = ({ product }) => {
-    const { sellerName, productName, image, category, originalPrice, phone, location, condition, date, description, relevantInformation, resalePrice, yearOfPurchase, time } = product;
+const Product = ({ product, setDeletingProduct }) => {
+    const { sellerName, sellerImage, productName, image,
+        originalPrice, location, condition, date, description,
+        resalePrice, yearOfPurchase, time } = product;
+
+
     return (
         <div>
             <div className="card bg-base-100 border shadow-xl" >
@@ -17,9 +22,27 @@ const Product = ({ product }) => {
                 </PhotoProvider>
 
                 <div className="card-body">
+                    <div className='flex items-center'>
+                        <div className="avatar">
+                            <div className="w-8 rounded-full ring ring-primary">
+                                {
+                                    sellerImage ?
+                                        <img src={sellerImage} alt='' />
+                                        :
+                                        <p className='text-4xl'><FaUser /></p>
+                                }
+                            </div>
+                            <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
+                        </div>
+                        <h4 className='text-xl font-bold ml-1'>{sellerName}</h4>
+                    </div>
+                    <p><small>{date} ({time})</small></p>
                     <h2 className="card-title">
                         {productName}
                     </h2>
+                    <p className='font-semibold'>Location: {location}</p>
+                    <p className='font-semibold'>Condition: {condition}</p>
+                    <p className='font-semibold'>Purchase Year: {yearOfPurchase}</p>
                     <p>{description.slice(0, 97
                     )}...</p>
                     <div>
@@ -28,9 +51,14 @@ const Product = ({ product }) => {
                     </div>
                     <div className="card-actions justify-between">
                         <button className="badge badge-outline px-5 text-blue-900">
-                            Details</button>
+                            Advertise
+                        </button>
 
-                        <button className="badge badge-outline px-5 text-blue-900 ">Buy Now</button>
+                        <label
+                            htmlFor="confirmation-modal"
+                            onClick={() => setDeletingProduct(product)}
+                            className="badge badge-outline px-5 text-blue-900 "
+                        >Delete</label>
                     </div>
                 </div>
             </div>
