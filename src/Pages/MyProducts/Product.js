@@ -3,8 +3,8 @@ import { FaCheckCircle, FaUser } from 'react-icons/fa';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
-const Product = ({ product, setDeletingProduct }) => {
-    const { sellerName, sellerImage, productName, image,
+const Product = ({ product, handleAdvertise, setDeletingProduct }) => {
+    const { _id, sellerName, sellerImage, productName, image,
         originalPrice, location, condition, date, description,
         resalePrice, yearOfPurchase, time } = product;
 
@@ -50,7 +50,9 @@ const Product = ({ product, setDeletingProduct }) => {
                         <h4 className="card-title">Original Price: {originalPrice} TK</h4>
                     </div>
                     <div className="card-actions justify-between">
-                        <button className="badge badge-outline px-5 text-blue-900">
+                        <button
+                            onClick={() => handleAdvertise(_id)}
+                            className="badge badge-outline px-5 text-blue-900">
                             Advertise
                         </button>
 

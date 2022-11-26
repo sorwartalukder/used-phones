@@ -26,6 +26,25 @@ const MyProducts = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
+    //product advertise handler
+    const handleAdvertise = (id) => {
+        fetch(`http://localhost:5000/products/advertise/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ advertise: true })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Start advertising.')
+                    refetch()
+                }
+                console.log(data.modifiedCount)
+            })
+    }
+    // product delete handler 
     const handleDeleteProduct = (product) => {
         console.log(product._id)
         fetch(`http://localhost:5000/products/${product._id}`, {
@@ -50,6 +69,7 @@ const MyProducts = () => {
                         key={product._id}
                         product={product}
                         setDeletingProduct={setDeletingProduct}
+                        handleAdvertise={handleAdvertise}
                     >
                     </Product>)
                 }
