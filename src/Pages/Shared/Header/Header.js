@@ -18,7 +18,10 @@ const Header = () => {
             <li><Link to="/my-products">My Products</Link></li>
         </>}
         <li><Link to="/reviews">Reviews</Link></li>
-        <li><Link to="/dashboard">Dashboard</Link></li>
+        {
+            userRole === 'Admin' && <li><Link to="/dashboard">Dashboard</Link></li>
+        }
+
     </React.Fragment>
     return (
         <div className='bg-base-100'>

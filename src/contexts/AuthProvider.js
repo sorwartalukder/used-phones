@@ -8,6 +8,7 @@ export const AuthContext = createContext()
 const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
+    const [loadingUser, setLoadingUser] = useState(true)
     const [user, setUser] = useState(null)
     const [userRole, setUserRole] = useState(null)
 
@@ -28,7 +29,6 @@ const AuthProvider = ({ children }) => {
 
     const logOut = () => {
         setLoading(true)
-        setUserRole(null)
         return signOut(auth)
     }
 
@@ -44,10 +44,21 @@ const AuthProvider = ({ children }) => {
         });
         return () => unsubscribe();
     }, [])
+
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/user?email=${user?.email}`)
+            .then(res => res.json())
+            .then(u => {
+                setUserRole(u.role)
+                setLoadingUser(false)
+            })
+    }, [user?.email])
     console.log(userRole)
     const authInfo = {
         user,
         loading,
+        loadingUser,
         userRole,
         setUserRole,
         createUser,

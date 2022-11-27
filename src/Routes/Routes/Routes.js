@@ -3,6 +3,8 @@ import Dashboard from "../../Layout/Dashboard";
 import Main from "../../Layout/Main";
 import AddProduct from "../../Pages/AddProduct/AddProduct";
 import CategoryProducts from "../../Pages/AllProducts/CategoryProducts/CategoryProducts";
+import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
+import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -11,6 +13,7 @@ import ErrorElement from "../../Pages/Shared/ErrorElement/ErrorElement";
 import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
+import AdminRoute from "./AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -48,13 +51,21 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <AdminRoute> <Dashboard></Dashboard></AdminRoute>,
         ErrorElement: <ErrorElement></ErrorElement>,
         children: [
             {
                 path: '/dashboard',
-                element: <AllUsers></AllUsers>
-            }
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
+            {
+                path: '/dashboard/all-seller',
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
+            },
+            {
+                path: '/dashboard/all-buyer',
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+            },
         ]
     },
 ])
