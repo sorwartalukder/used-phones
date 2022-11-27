@@ -4,11 +4,15 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
+import useUserRole from '../../hooks/useUserRole';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { logIn, loginWithGoogle } = useContext(AuthContext)
     const [loginError, setLoginError] = useState('')
+    const [acTypeError, setAcTypeError] = useState('')
+    const [email, setEmail] = useState('')
+    const [userRole] = useUserRole(email)
     const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate()
     const location = useLocation()
@@ -16,17 +20,25 @@ const Login = () => {
 
     const handleLogin = data => {
         setLoginError('')
-        logIn(data.email, data.password)
-            .then((result) => {
-                toast.success('Log In Successfully.')
-                // const user = result.user;
-                navigate(from, { replace: true })
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                setLoginError(errorMessage)
-                console.error(error)
-            });
+        setAcTypeError('')
+        setEmail(data.email)
+        if (userRole === data.accountType) {
+            logIn(data.email, data.password)
+                .then((result) => {
+                    toast.success('Log In Successfully.')
+                    // const user = result.user;
+                    navigate(from, { replace: true })
+                })
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    setLoginError(errorMessage)
+                    console.error(error)
+                });
+        }
+        else {
+            setAcTypeError('wrong account type')
+            toast.error('please select right account type')
+        }
     }
 
     const handleLoginWithGoogle = () => {
@@ -81,6 +93,7 @@ const Login = () => {
 
                         </select>
                         {errors.accountType && <p className='text-red-600'>{errors.accountType?.message}</p>}
+                        {acTypeError && <p className='text-red-600'>{acTypeError}</p>}
                     </div>
 
                     {/* email field  */}

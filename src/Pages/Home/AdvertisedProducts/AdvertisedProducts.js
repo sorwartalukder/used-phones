@@ -45,7 +45,12 @@ const AdvertisedProducts = () => {
     }
     return (
         <div className='max-w-[1440px] mx-auto my-16'>
-            <h2 className='text-center font-bold text-4xl my-6'>Advertised Products</h2>
+            {
+                advertisedProducts.length ? <h2 className='text-center font-bold text-4xl my-6'>Advertised Products</h2>
+                    :
+                    ''
+            }
+
 
             {/* advertised products  */}
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-20  mx-9 lg:mx-0'>
