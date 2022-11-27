@@ -2,14 +2,12 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PrimaryBtn from '../../../components/AllButton/PrimaryBtn';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import useUserRole from '../../../hooks/useUserRole';
 
 const Header = () => {
-    const { user, logOut } = useContext(AuthContext)
-    const [userRole] = useUserRole(user?.email)
+    const { user, logOut, userRole, setUserRole } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => { setUserRole(null) })
             .catch(e => console.error(e))
     }
 
@@ -48,9 +46,11 @@ const Header = () => {
                                 onClick={handleLogOut}
                                 className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">Log out</button>
                             :
-                            <PrimaryBtn>
-                                <Link to='/login'>Log In</Link>
-                            </PrimaryBtn>
+                            <Link to='/login'>
+                                <PrimaryBtn>
+                                    Log In
+                                </PrimaryBtn>
+                            </Link>
                     }
                 </div>
                 <label tabIndex={2}

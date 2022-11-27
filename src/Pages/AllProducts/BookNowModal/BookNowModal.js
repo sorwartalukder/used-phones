@@ -3,8 +3,10 @@ import 'react-photo-view/dist/react-photo-view.css';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
+    //user
     const { user } = useContext(AuthContext)
-    const { productName, resalePrice } = bookProduct;
+    //booking product
+    const { _id, productName, resalePrice } = bookProduct;
     return (
         <div>
             <input type="checkbox" id="book-now" className="modal-toggle" />
@@ -13,11 +15,19 @@ const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
                     <form >
                         {/* name field  */}
                         <div className=" flex  font-bold text-lg">
+                            <label className="label"><span className="label-text">Product ID: </span></label>
+                            <input disabled
+                                defaultValue={_id}
+                                type="text"
+                            />
+
+                        </div>
+                        {/* name field  */}
+                        <div className=" flex  font-bold text-lg">
                             <label className="label"><span className="label-text">Your Name: </span></label>
                             <input disabled
                                 defaultValue={user.displayName}
                                 type="text"
-
                             />
 
                         </div>

@@ -7,6 +7,7 @@ import BookNowModal from '../BookNowModal/BookNowModal';
 import CategoryProduct from './CategoryProduct';
 
 const CategoryProducts = () => {
+
     const categoryProducts = useLoaderData()
     const [allCategoryProducts, setAllCategoryProducts] = useState(categoryProducts)
     const [bookProduct, setBookProduct] = useState(null)
@@ -19,7 +20,10 @@ const CategoryProducts = () => {
         setBookProduct(null);
     }
     //booking handle
-    const handleBooking = bookProduct => {
+    const handleBooking = data => {
+
+        console.log(data)
+
         fetch(`http://localhost:5000/products/advertise/${bookProduct._id}`, {
             method: 'PUT',
             headers: {
@@ -31,8 +35,8 @@ const CategoryProducts = () => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     toast.success(`${user.displayName} ${bookProduct.productName} is booked for you`)
-                    const remaing = categoryProducts.filter(categoryProduct => categoryProduct._id !== bookProduct._id)
-                    setAllCategoryProducts(remaing)
+                    const remaining = categoryProducts.filter(categoryProduct => categoryProduct._id !== bookProduct._id)
+                    setAllCategoryProducts(remaining)
 
                 }
             })

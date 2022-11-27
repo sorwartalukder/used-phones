@@ -1,6 +1,7 @@
 import React from 'react';
 
 const AllSellers = () => {
+
     return (
         <div>
             allser

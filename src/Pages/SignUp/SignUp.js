@@ -3,21 +3,22 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
-
 const SignUp = () => {
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile, setUserRole } = useContext(AuthContext)
     const [signUpError, setSignUpError] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate()
     const imageHostKey = process.env.REACT_APP_imgbb_key;
 
-    // create user
+    // create user handler
     const handleUserCreate = data => {
         setSignUpError('')
+        //create user
         createUser(data.email, data.password)
             .then((result) => {
                 toast.success('Account Created Successfully.')
                 const user = result.user;
+                setUserRole(data.accountType)
                 //store image
                 const image = data.image[0];
                 const formData = new FormData();
@@ -37,7 +38,7 @@ const SignUp = () => {
                         updateUserProfile(userInfo)
                             .then(() => {
                                 // user save database function call
-                                saveUserDatabase(data.accountType, user.displayName, user.email)
+                                saveUserDatabase(data.accountType, user.displayName, user.email, imgData.data.url)
                             })
                             .catch(e => console.error(e))
 
@@ -52,8 +53,8 @@ const SignUp = () => {
 
     }
     //user save function
-    const saveUserDatabase = (role, name, email) => {
-        const user = { role, name, email }
+    const saveUserDatabase = (role, name, email, image) => {
+        const user = { role, name, email, image }
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
@@ -63,7 +64,9 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
+
                 navigate('/')
+
             })
     }
     //account type

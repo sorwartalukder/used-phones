@@ -4,59 +4,63 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
-import useUserRole from '../../hooks/useUserRole';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { logIn, loginWithGoogle } = useContext(AuthContext)
+    const { logIn, loginWithGoogle, setUserRole } = useContext(AuthContext)
     const [loginError, setLoginError] = useState('')
     const [acTypeError, setAcTypeError] = useState('')
-    const [email, setEmail] = useState('')
-    const [userRole] = useUserRole(email)
     const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
-
+    //email login handler 
     const handleLogin = data => {
         setLoginError('')
         setAcTypeError('')
-        setEmail(data.email)
-        if (userRole === data.accountType) {
-            logIn(data.email, data.password)
-                .then((result) => {
-                    toast.success('Log In Successfully.')
-                    // const user = result.user;
-                    navigate(from, { replace: true })
-                })
-                .catch((error) => {
-                    const errorMessage = error.message;
-                    setLoginError(errorMessage)
-                    console.error(error)
-                });
-        }
-        else {
-            setAcTypeError('wrong account type')
-            toast.error('please select right account type')
-        }
+        //check user role
+        fetch(`http://localhost:5000/user?email=${data.email}`)
+            .then(res => res.json())
+            .then(user => {
+                if (user.role === data.accountType) {
+                    setUserRole(user.role)
+                    // login user 
+                    logIn(data.email, data.password)
+                        .then((result) => {
+                            toast.success('Log In Successfully.')
+                            navigate(from, { replace: true })
+                        })
+                        .catch((error) => {
+                            // login error message
+                            const errorMessage = error.message;
+                            setLoginError(errorMessage)
+                            console.error(error)
+                        });
+                }
+                else {
+                    //wrong account information message
+                    setAcTypeError('wrong account type')
+                    toast.error('please select right account type')
+                }
+            })
     }
-
+    // google login handler
     const handleLoginWithGoogle = () => {
         loginWithGoogle(googleProvider)
             .then((result) => {
                 const user = result.user;
-                saveUserDatabase('Buyer', user.displayName, user.email)
+                setUserRole('Buyer')
+                saveUserDatabase('Buyer', user.displayName, user.email, user.photoURL)
                 toast.success('Log In Successfully.')
                 navigate(from, { replace: true })
             }).catch((error) => {
                 const errorMessage = error.message;
                 toast.error(errorMessage)
             });
-
     }
-
-    const saveUserDatabase = (role, name, email) => {
-        const user = { role, name, email }
+    // user save database function
+    const saveUserDatabase = (role, name, email, image) => {
+        const user = { role, name, email, image }
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
