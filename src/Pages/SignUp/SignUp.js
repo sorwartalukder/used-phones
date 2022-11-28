@@ -55,7 +55,7 @@ const SignUp = () => {
     //user save function
     const saveUserDatabase = (role, name, email, image) => {
         const user = { role, name, email, image }
-        fetch('http://localhost:5000/users', {
+        fetch('https://used-phone-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

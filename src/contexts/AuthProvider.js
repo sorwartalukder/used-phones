@@ -38,16 +38,15 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log(currentUser)
+
             setLoading(false)
             setUser(currentUser)
         });
         return () => unsubscribe();
     }, [])
 
-    console.log(userRole)
     useEffect(() => {
-        fetch(`http://localhost:5000/user?email=${user?.email}`)
+        fetch(`https://used-phone-server.vercel.app/user?email=${user?.email}`)
             .then(res => res.json())
             .then(u => {
                 setUserRole(u.role)

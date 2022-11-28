@@ -14,7 +14,7 @@ const CategoryProducts = () => {
     const { data: categoryProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['categoryProducts'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/category/products/${categoryName.category}`);
+            const res = await fetch(`https://used-phone-server.vercel.app/category/products/${categoryName.category}`);
             const data = res.json();
             return data
         }
@@ -52,7 +52,7 @@ const CategoryProducts = () => {
             meetingLocation
         }
         setBookProduct(null)
-        fetch('http://localhost:5000/booking', {
+        fetch('https://used-phone-server.vercel.app/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -64,7 +64,7 @@ const CategoryProducts = () => {
                 toast.success(`${buyerName} Your order confirm`)
             })
 
-        fetch(`http://localhost:5000/products/${productId}`, {
+        fetch(`https://used-phone-server.vercel.app/products/${productId}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -81,7 +81,7 @@ const CategoryProducts = () => {
 
     const handleReport = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://used-phone-server.vercel.app/products/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

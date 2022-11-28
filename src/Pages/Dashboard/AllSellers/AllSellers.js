@@ -7,14 +7,14 @@ const AllSellers = () => {
     const { data: allSeller = [], isLoading, refetch } = useQuery({
         queryKey: ['all-seller'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/all-seller');
+            const res = await fetch('https://used-phone-server.vercel.app/all-seller');
             const data = res.json();
             return data
         }
     })
     const handleVerify = (id, email) => {
         console.log(email)
-        fetch(`http://localhost:5000/products?email=${email}`, {
+        fetch(`https://used-phone-server.vercel.app/products?email=${email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -25,7 +25,7 @@ const AllSellers = () => {
             .then(data => {
             })
 
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://used-phone-server.vercel.app/users/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
