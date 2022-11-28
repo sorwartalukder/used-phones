@@ -3,11 +3,15 @@ import Dashboard from "../../Layout/Dashboard";
 import Main from "../../Layout/Main";
 import AddProduct from "../../Pages/AddProduct/AddProduct";
 import CategoryProducts from "../../Pages/AllProducts/CategoryProducts/CategoryProducts";
+import Blog from "../../Pages/Blog/Blog";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
+import ReportedProducts from "../../Pages/Dashboard/ReportedProducts/ReportedProducts";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import MyBuyers from "../../Pages/MyBuyers/MyBuyers";
+import MyOrders from "../../Pages/MyOrders/MyOrders";
 import MyProducts from "../../Pages/MyProducts/MyProducts";
 import ErrorElement from "../../Pages/Shared/ErrorElement/ErrorElement";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -32,6 +36,18 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: '/my-buyers',
+                element: <MyBuyers></MyBuyers>
+            },
+            {
+                path: '/my-orders',
+                element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/blogs',
+                element: <Blog></Blog>
             },
             {
                 path: '/add-product',
@@ -65,6 +81,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/all-buyer',
                 element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+            },
+            {
+                path: '/dashboard/reported-products',
+                element: <AdminRoute><ReportedProducts></ReportedProducts></AdminRoute>
             },
         ]
     },

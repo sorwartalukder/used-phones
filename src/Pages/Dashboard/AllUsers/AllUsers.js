@@ -13,8 +13,6 @@ const AllUsers = () => {
         }
     })
     const makeAdmin = (id) => {
-        console.log(id)
-
         fetch(`http://localhost:5000/users/${id}`, {
             method: 'PUT',
             headers: {
@@ -32,7 +30,6 @@ const AllUsers = () => {
 
     }
     const handleDelete = (id) => {
-        console.log(id)
         fetch(`http://localhost:5000/users/${id}`, {
             method: 'DELETE'
         })

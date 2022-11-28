@@ -23,8 +23,46 @@ const AdvertisedProducts = () => {
         setBookProduct(null);
     }
     //booking handle
-    const handleBooking = bookProduct => {
-        fetch(`http://localhost:5000/products/advertise/${bookProduct._id}`, {
+    const handleBooking = event => {
+        event.preventDefault()
+        const form = event.target;
+        const productId = form.productId.value;
+        const sellerName = form.sellerName.value;
+        const sellerEmail = form.sellerEmail.value;
+        const sellerMobile = form.sellerMobile.value;
+        const buyerName = form.buyerName.value;
+        const buyerEmail = form.buyerEmail.value;
+        const productName = form.productName.value;
+        const price = form.price.value;
+        const buyerMobile = form.buyerMobile.value;
+        const meetingLocation = form.meetingLocation.value;
+
+        const booking = {
+            sellerName,
+            productId,
+            sellerEmail,
+            sellerMobile,
+            buyerName,
+            buyerEmail,
+            productName,
+            price,
+            buyerMobile,
+            meetingLocation
+        }
+        setBookProduct(null)
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast.success(`${buyerName} Your order confirm`)
+            })
+
+        fetch(`http://localhost:5000/products/${productId}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -35,7 +73,6 @@ const AdvertisedProducts = () => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     refetch()
-                    toast.success(`${user.displayName} ${bookProduct.productName} is booked for you`)
                 }
             })
     }

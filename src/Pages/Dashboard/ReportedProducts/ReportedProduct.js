@@ -2,9 +2,9 @@ import React from 'react';
 import { FaCheckCircle, FaUser } from 'react-icons/fa';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
-const CategoryProduct = ({ product, setBookProduct, handleReport }) => {
-    const { _id, sellerName, userVerify, sellerImage, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = product;
-    // console.log(email)
+
+const ReportedProduct = ({ RProduct, handleDelete }) => {
+    const { _id, sellerName, userVerify, sellerImage, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = RProduct;
 
     return (
         <div className="card bg-base-100 border shadow-xl h-full" >
@@ -47,20 +47,14 @@ const CategoryProduct = ({ product, setBookProduct, handleReport }) => {
                 <h4 className="card-title">Resale Price:<span style={{ color: 'darkorange' }}>{resalePrice} TK</span></h4>
                 <h4 className="card-title">Original Price: {originalPrice} TK</h4>
                 <p className='font-semibold'>Mobile Number: {phone}</p>
-                <div className="card-actions justify-between">
-                    <button
-                        onClick={() => handleReport(_id)}
-                        className="badge badge-outline px-5 text-red-500">
-                        Report</button>
-
+                <div className="card-actions justify-end">
                     <label
-                        htmlFor="book-now"
-                        onClick={() => setBookProduct(product)}
-                        className="badge badge-outline px-5 text-blue-900 ">Book now</label>
+                        onClick={() => handleDelete(_id)}
+                        className="badge badge-outline bg-red-500 px-5 text-white">Delete</label>
                 </div>
             </div>
         </div>
     );
 };
 
-export default CategoryProduct;
+export default ReportedProduct;

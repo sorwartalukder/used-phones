@@ -27,6 +27,9 @@ const Dashboard = () => {
                                 <li className='mx-auto'>
                                     <Link to='/dashboard/all-buyer'>All Buyer</Link>
                                 </li>
+                                <li className='mx-auto'>
+                                    <Link to='/dashboard/reported-products'>Reported Products</Link>
+                                </li>
                             </>
                         }
                     </ul>

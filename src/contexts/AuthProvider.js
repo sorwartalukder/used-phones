@@ -54,7 +54,6 @@ const AuthProvider = ({ children }) => {
                 setLoadingUser(false)
             })
     }, [user?.email])
-    console.log(userRole)
     const authInfo = {
         user,
         loading,

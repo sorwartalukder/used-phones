@@ -13,11 +13,13 @@ const Header = () => {
 
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
+        <li><Link to="/my-orders">My Order</Link></li>
         {userRole === 'Seller' && <>
             <li><Link to="/add-product">Add A Product</Link></li>
             <li><Link to="/my-products">My Products</Link></li>
+            <li><Link to="/my-buyers">My Buyer</Link></li>
         </>}
-        <li><Link to="/reviews">Reviews</Link></li>
+        <li><Link to="/blogs">blogs</Link></li>
         {
             userRole === 'Admin' && <li><Link to="/dashboard">Dashboard</Link></li>
         }

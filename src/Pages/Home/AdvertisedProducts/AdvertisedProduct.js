@@ -4,7 +4,7 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
 const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
-    const { sellerName, sellerImage, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = advertisedProduct;
+    const { sellerName, sellerImage, userVerify, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = advertisedProduct;
     return (
         <div>
             <div className="card bg-base-100 border shadow-xl h-full" >
@@ -28,7 +28,10 @@ const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
                                         <p className='text-4xl'><FaUser /></p>
                                 }
                             </div>
-                            <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
+                            {
+                                userVerify && <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
+                            }
+
                         </div>
                         <h4 className='text-xl font-bold ml-1'>{sellerName}</h4>
                     </div>
@@ -45,8 +48,8 @@ const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
                     <h4 className="card-title">Original Price: {originalPrice} TK</h4>
                     <p className='font-semibold'>Mobile Number: {phone}</p>
                     <div className="card-actions justify-between">
-                        <button className="badge badge-outline px-5 text-blue-900">
-                            Details</button>
+                        <button className="badge badge-outline bg-green-900 px-5 text-white">
+                            Ads</button>
 
                         <label
                             htmlFor="book-now"

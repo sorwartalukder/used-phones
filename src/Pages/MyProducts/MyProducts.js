@@ -28,7 +28,7 @@ const MyProducts = () => {
     }
     //product advertise handler
     const handleAdvertise = (id) => {
-        fetch(`http://localhost:5000/products/advertise/${id}`, {
+        fetch(`http://localhost:5000/products/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

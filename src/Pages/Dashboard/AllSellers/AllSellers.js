@@ -12,9 +12,18 @@ const AllSellers = () => {
             return data
         }
     })
-    const handleVerify = (id) => {
-        console.log(id)
-
+    const handleVerify = (id, email) => {
+        console.log(email)
+        fetch(`http://localhost:5000/products?email=${email}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ userVerify: true })
+        })
+            .then(res => res.json())
+            .then(data => {
+            })
 
         fetch(`http://localhost:5000/users/${id}`, {
             method: 'PUT',
@@ -75,7 +84,7 @@ const AllSellers = () => {
                                             :
 
                                             <label
-                                                onClick={() => handleVerify(seller._id)}
+                                                onClick={() => handleVerify(seller._id, seller.email)}
                                                 className="btn btn-sm btn-primary bg-gradient-to-r from-primary to-secondary text-white"
                                             >
                                                 Verify</label>

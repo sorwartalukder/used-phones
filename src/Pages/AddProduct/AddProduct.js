@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const AddProduct = () => {
@@ -12,6 +13,7 @@ const AddProduct = () => {
     const currentDate = new Date();
     const time = (currentDate.getHours() + ':' + currentDate.getMinutes())
     const date = format(currentDate, 'PP');
+    const navigate = useNavigate()
 
     //add product
     const handleAddProduct = data => {
@@ -61,6 +63,7 @@ const AddProduct = () => {
                             console.log(result)
                             if (result.acknowledged) {
                                 toast.success(`${user.displayName} product added successfully`)
+                                // navigate('/my-products')
                             }
                         })
 

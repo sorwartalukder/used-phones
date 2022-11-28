@@ -4,7 +4,7 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
 const Product = ({ product, handleAdvertise, setDeletingProduct }) => {
-    const { _id, sellerName, sellerImage, productName, image,
+    const { _id, sellerName, userVerify, booked, sellerImage, productName, image,
         originalPrice, location, condition, date, description,
         resalePrice, yearOfPurchase, time, advertise } = product;
 
@@ -32,7 +32,10 @@ const Product = ({ product, handleAdvertise, setDeletingProduct }) => {
                                         <p className='text-4xl'><FaUser /></p>
                                 }
                             </div>
-                            <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
+                            {
+                                userVerify && <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
+                            }
+
                         </div>
                         <h4 className='text-xl font-bold ml-1'>{sellerName}</h4>
                     </div>
@@ -51,18 +54,28 @@ const Product = ({ product, handleAdvertise, setDeletingProduct }) => {
                     </div>
                     <div className="card-actions justify-between">
                         {
-                            advertise ?
+                            booked ?
                                 <button
                                     // onClick={() => handleAdvertise(_id)}
-                                    className="badge badge-outline px-5 text-red-500">
-                                    Off Advertise
+                                    className="badge badge-outline bg-green-500 px-5 text-white">
+                                    Sold
                                 </button>
                                 :
-                                <button
-                                    onClick={() => handleAdvertise(_id)}
-                                    className="badge badge-outline px-5 text-blue-900">
-                                    Advertise
-                                </button>
+                                <>{
+                                    advertise ?
+                                        <button
+                                            // onClick={() => handleAdvertise(_id)}
+                                            className="badge badge-outline px-5 text-red-500">
+                                            Off Advertise
+                                        </button>
+                                        :
+                                        <button
+                                            onClick={() => handleAdvertise(_id)}
+                                            className="badge badge-outline px-5 text-blue-900">
+                                            Advertise
+                                        </button>
+                                }</>
+
                         }
                         <label
                             htmlFor="confirmation-modal"
