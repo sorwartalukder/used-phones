@@ -75,7 +75,6 @@ const SignUp = () => {
         <section className='min-h-screen flex justify-center items-center my-12'>
             <div className='w-96 p-7 shadow-2xl rounded-lg'>
                 <h2 className='text-xl text-center'>Sign Up</h2>
-                <h2 className='text-xl text-center'>mD.talukdeR2.0</h2>
                 <form onSubmit={handleSubmit(handleUserCreate)}>
 
                     {/*account type */}

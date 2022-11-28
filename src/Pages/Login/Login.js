@@ -78,7 +78,6 @@ const Login = () => {
         <section className='min-h-screen py-14 flex justify-center items-center'>
             <div className='w-96 p-7 shadow-2xl rounded-lg'>
                 <h2 className='text-xl text-center'>Login</h2>
-                <h2 className='text-xl text-center'>mD.talukdeR2.0</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>
                     {/*account type */}
                     <div className="form-control w-full max-w-xs">
