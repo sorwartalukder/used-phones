@@ -74,6 +74,7 @@ const AdvertisedProducts = () => {
                 }
             })
     }
+
     // products loading spinner 
     if (isLoading) {
         return <Loading></Loading>

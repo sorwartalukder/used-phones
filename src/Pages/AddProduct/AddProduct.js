@@ -62,8 +62,8 @@ const AddProduct = () => {
                         .then(result => {
                             console.log(result)
                             if (result.acknowledged) {
-                                toast.success(`${user.displayName} product added successfully`)
-                                // navigate('/my-products')
+                                toast.success(`${user.displayName} product added successfully. after approve admin then see product buyer, show advertise and show category products`)
+                                navigate('/my-products')
                             }
                         })
 

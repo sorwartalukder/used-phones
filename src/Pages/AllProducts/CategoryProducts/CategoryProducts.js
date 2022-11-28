@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import Loading from '../../../components/Loading/Loading';
-import { AuthContext } from '../../../contexts/AuthProvider';
 import BookNowModal from '../BookNowModal/BookNowModal';
 import CategoryProduct from './CategoryProduct';
 
