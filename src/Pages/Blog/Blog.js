@@ -1,22 +1,8 @@
 import React from 'react';
 
 const Blog = () => {
-    const blogs = [
-        {
-            qu: '',
-            ans: ''
-        },
-        {
-            qu: '',
-            ans: ''
-        },
-        {
-            qu: '',
-            ans: '  '
-        }
-    ]
     return (
-        <div className='max-w-[1440px] min-h-screen mx-auto my-14 text-justify'>
+        <div className='max-w-[1440px] min-h-screen  mx-auto my-14 text-justify'>
             <div className=' my-10'>
                 <h2 className='text-4xl mb-5'>What are the different ways to manage a state in a React application?</h2>
                 <p className='text-2xl'>

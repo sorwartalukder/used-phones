@@ -17,7 +17,6 @@ const MyOrders = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    console.log(myOrders)
     return (
         <div className='max-w-[1440px] mx-auto my-16 mb-36 min-h-screen'>
             <h2 className="text-3xl text-center bg-slate-900 text-white py-6">Total Order: {myOrders?.length}</h2>

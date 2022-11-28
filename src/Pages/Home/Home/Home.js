@@ -13,7 +13,7 @@ const Home = () => {
         <div>
             <HomeHeader></HomeHeader>
             <Categories></Categories>
-            {user?.email && <AdvertisedProducts></AdvertisedProducts>}
+            {<AdvertisedProducts></AdvertisedProducts>}
             <HomeAbout></HomeAbout>
         </div>
     );

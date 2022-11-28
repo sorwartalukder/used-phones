@@ -1,13 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import Loading from '../../../components/Loading/Loading';
-import { AuthContext } from '../../../contexts/AuthProvider';
 import BookNowModal from '../../AllProducts/BookNowModal/BookNowModal';
 import AdvertisedProduct from './AdvertisedProduct';
 
 const AdvertisedProducts = () => {
-    const { user } = useContext(AuthContext)
     const [bookProduct, setBookProduct] = useState(null)
     const { data: advertisedProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['advertised-products'],
