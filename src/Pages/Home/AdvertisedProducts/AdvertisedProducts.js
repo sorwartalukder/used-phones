@@ -10,7 +10,7 @@ const AdvertisedProducts = () => {
     const { data: advertisedProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['advertised-products'],
         queryFn: async () => {
-            const res = await fetch('https://used-phone-server.vercel.app/products/advertise', {
+            const res = await fetch('http://localhost:5000/products/advertise', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('usePhonsToken')}`
                 }
@@ -52,7 +52,7 @@ const AdvertisedProducts = () => {
             meetingLocation
         }
         setBookProduct(null)
-        fetch('https://used-phone-server.vercel.app/booking', {
+        fetch('http://localhost:5000/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -64,7 +64,7 @@ const AdvertisedProducts = () => {
                 toast.success(`${buyerName} Your order confirm`)
             })
 
-        fetch(`https://used-phone-server.vercel.app/products/${productId}`, {
+        fetch(`http://localhost:5000/products/${productId}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

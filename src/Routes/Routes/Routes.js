@@ -46,7 +46,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:category',
                 element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
-                loader: ({ params }) => fetch(`https://used-phone-server.vercel.app/category/${params.category}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.category}`)
             },
 
         ]
