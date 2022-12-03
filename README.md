@@ -3,24 +3,29 @@ https://used-phones-e6a78.firebaseapp.com/
 
 ##use tools
 
-* 1. Tailwind
+* React.js
 
- * 2. daisyUI
+ * React Router
  
- * 3. React Router
+ * React Query
  
- * 4. React icons
+ * React Hook Form
  
- * 5. firebase
+ * React Icons
  
- * 6. React hook form
+ * Rect hot toast
  
- * 7. React hot toast
+ * React photo view
  
- * 8. React query
+ * Context API
  
- * 9. react-photo-view
+ * Tailwind
  
- ## Admin
- sortefoodimport@gmail.com
- mD.talukdeR2.0
+ * DaisyUI
+ 
+ * MongoDB
+ 
+ * Firebase
+ 
+ * JWT
+
