@@ -62,7 +62,7 @@ const SignUp = () => {
     //user save function
     const saveUserDatabase = (role, name, email, image) => {
         const user = { role, name, email, image }
-        fetch('https://used-phone-server.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -71,9 +71,7 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
-
                 setCreatedUserEmail(email)
-
             })
     }
     //account type

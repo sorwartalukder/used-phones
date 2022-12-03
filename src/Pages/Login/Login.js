@@ -29,7 +29,7 @@ const Login = () => {
         setLoginError('')
         setAcTypeError('')
         //check user role
-        fetch(`https://used-phone-server.vercel.app/user?email=${data.email}`)
+        fetch(`http://localhost:5000/user?email=${data.email}`)
             .then(res => res.json())
             .then(user => {
                 if (user.role === data.accountType) {
@@ -56,12 +56,11 @@ const Login = () => {
     }
     // google login handler
     const handleLoginWithGoogle = () => {
+        setLoginUserEmail('')
         loginWithGoogle(googleProvider)
             .then((result) => {
                 const user = result.user;
                 saveUserDatabase('Buyer', user.displayName, user.email, user.photoURL)
-                toast.success('Log In Successfully.')
-                setLoginUserEmail(user.email)
             }).catch((error) => {
                 const errorMessage = error.message;
                 toast.error(errorMessage)
@@ -70,7 +69,7 @@ const Login = () => {
     // user save database function
     const saveUserDatabase = (role, name, email, image) => {
         const user = { role, name, email, image }
-        fetch('https://used-phone-server.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -79,6 +78,9 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data)
+                toast.success('Log In Successfully.')
+                setLoginUserEmail(email)
             })
     }
 

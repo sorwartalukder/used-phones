@@ -8,7 +8,7 @@ const ReportedProducts = () => {
     const { data: reportedProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['reported-products'],
         queryFn: async () => {
-            const res = await fetch(`https://used-phone-server.vercel.app/reported/products`, {
+            const res = await fetch(`http://localhost:5000/reported/products`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('usePhonsToken')}`
                 }
@@ -18,7 +18,7 @@ const ReportedProducts = () => {
         }
     })
     const handleDelete = (id) => {
-        fetch(`https://used-phone-server.vercel.app/products/${id}`, {
+        fetch(`http://localhost:5000/products/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
