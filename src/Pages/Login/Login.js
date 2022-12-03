@@ -29,7 +29,7 @@ const Login = () => {
         setLoginError('')
         setAcTypeError('')
         //check user role
-        fetch(`http://localhost:5000/user?email=${data.email}`)
+        fetch(`https://used-phone-server.vercel.app/user?email=${data.email}`)
             .then(res => res.json())
             .then(user => {
                 if (user.role === data.accountType) {
@@ -69,7 +69,7 @@ const Login = () => {
     // user save database function
     const saveUserDatabase = (role, name, email, image) => {
         const user = { role, name, email, image }
-        fetch('http://localhost:5000/users', {
+        fetch('https://used-phone-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
