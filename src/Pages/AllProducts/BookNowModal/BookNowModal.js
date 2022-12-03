@@ -5,13 +5,13 @@ import PrivateRoute from '../../../Routes/PrivateRoute/PrivateRoute';
 
 const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
     //user
-    const { user, userRole } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     //booking product
     const { _id, sellerName, email, phone, productName, resalePrice } = bookProduct;
     return (
         <div>
             {
-                userRole ?
+                user ?
                     <>
                         <div>
                             <input type="checkbox" id="book-now" className="modal-toggle" />

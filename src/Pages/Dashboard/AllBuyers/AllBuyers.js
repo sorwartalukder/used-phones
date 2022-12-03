@@ -6,7 +6,11 @@ const AllBuyers = () => {
     const { data: allBuyer = [], isLoading } = useQuery({
         queryKey: ['all-seller'],
         queryFn: async () => {
-            const res = await fetch('https://used-phone-server.vercel.app/all-buyer');
+            const res = await fetch('https://used-phone-server.vercel.app/all-buyer', {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('usePhonsToken')}`
+                }
+            });
             const data = res.json();
             return data
         }

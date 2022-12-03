@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import phones from '../../../assets/Images/banner image.jpg'
 
 const HomeHeader = () => {
@@ -9,7 +10,7 @@ const HomeHeader = () => {
                 <div className='text-white w-full lg:mr-20'>
                     <h1 className="text-5xl font-bold ">USED PHONES</h1>
                     <p className="py-6 text-xl">Keep looking and maybe you will get your favorite mobile.</p>
-                    <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">start</button>
+                    <Link to='signup'>  <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">start</button></Link>
                 </div>
             </div>
         </div >

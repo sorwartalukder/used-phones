@@ -8,4 +8,18 @@
  * 7. React hot toast
  * 8. React query
  * 9. react-photo-view
+ * React.js
+ * React Router
+ * React Query
+ * React Hook Form
+ * React Icons
+ * Rect hot toast
+ * React photo view
+ * Context API
+ * Tailwind
+ * DaisyUI
+ * MongoDB
+ * Firebase
+ * JWT
+ * 
 */

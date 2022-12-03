@@ -4,16 +4,26 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { logIn, loginWithGoogle, setUserRole } = useContext(AuthContext)
+    const { logIn, loginWithGoogle } = useContext(AuthContext)
     const [loginError, setLoginError] = useState('')
     const [acTypeError, setAcTypeError] = useState('')
     const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
+
+    // jwt 
+    const [loginUserEmail, setLoginUserEmail] = useState('')
+    const [token] = useToken(loginUserEmail)
+    if (token) {
+        navigate(from, { replace: true });
+    }
+
+
     //email login handler 
     const handleLogin = data => {
         setLoginError('')
@@ -23,12 +33,12 @@ const Login = () => {
             .then(res => res.json())
             .then(user => {
                 if (user.role === data.accountType) {
-                    setUserRole(user.role)
                     // login user 
                     logIn(data.email, data.password)
                         .then((result) => {
                             toast.success('Log In Successfully.')
-                            navigate(from, { replace: true })
+                            const user = result.user;
+                            setLoginUserEmail(user.email)
                         })
                         .catch((error) => {
                             // login error message
@@ -49,10 +59,9 @@ const Login = () => {
         loginWithGoogle(googleProvider)
             .then((result) => {
                 const user = result.user;
-                setUserRole('Buyer')
                 saveUserDatabase('Buyer', user.displayName, user.email, user.photoURL)
                 toast.success('Log In Successfully.')
-                navigate(from, { replace: true })
+                setLoginUserEmail(user.email)
             }).catch((error) => {
                 const errorMessage = error.message;
                 toast.error(errorMessage)
@@ -78,6 +87,9 @@ const Login = () => {
         <section className='min-h-screen py-14 flex justify-center items-center'>
             <div className='w-96 p-7 shadow-2xl rounded-lg'>
                 <h2 className='text-xl text-center'>Login</h2>
+                <h2 className='text-xl text-center'>Admin feature explore</h2>
+                <h2 className='text-xl text-center'>	so@1.com</h2>
+                <h2 className='text-xl text-center'>	so@1.coM</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>
                     {/*account type */}
                     <div className="form-control w-full max-w-xs">

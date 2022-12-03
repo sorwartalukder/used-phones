@@ -10,11 +10,15 @@ const CategoryProducts = () => {
     const categoryName = useLoaderData()
     const [bookProduct, setBookProduct] = useState(null)
     const navigation = useNavigation();
-
     const { data: categoryProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['categoryProducts'],
         queryFn: async () => {
-            const res = await fetch(`https://used-phone-server.vercel.app/category/products/${categoryName.category}`);
+            const res = await fetch(`https://used-phone-server.vercel.app/category/products/${categoryName.category}`, {
+                headers: {
+                    //jwt
+                    authorization: `bearer ${localStorage.getItem('usePhonsToken')}`
+                }
+            });
             const data = res.json();
             return data
         }
@@ -80,7 +84,6 @@ const CategoryProducts = () => {
     }
 
     const handleReport = (id) => {
-        console.log(id)
         fetch(`https://used-phone-server.vercel.app/products/${id}`, {
             method: 'PUT',
             headers: {

@@ -8,6 +8,7 @@ import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import ReportedProducts from "../../Pages/Dashboard/ReportedProducts/ReportedProducts";
+import UserProfile from "../../Pages/Dashboard/UserProfile/UserProfile";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import MyBuyers from "../../Pages/MyBuyers/MyBuyers";
@@ -38,25 +39,10 @@ const router = createBrowserRouter([
                 element: <SignUp></SignUp>
             },
             {
-                path: '/my-buyers',
-                element: <MyBuyers></MyBuyers>
-            },
-            {
-                path: '/my-orders',
-                element: <MyOrders></MyOrders>
-            },
-            {
                 path: '/blogs',
                 element: <Blog></Blog>
             },
-            {
-                path: '/add-product',
-                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
-            },
-            {
-                path: '/my-products',
-                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
-            },
+
             {
                 path: '/category/:category',
                 element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
@@ -67,11 +53,15 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <AdminRoute> <Dashboard></Dashboard></AdminRoute>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         ErrorElement: <ErrorElement></ErrorElement>,
         children: [
             {
                 path: '/dashboard',
+                element: <UserProfile></UserProfile>
+            },
+            {
+                path: '/dashboard/all-user',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
@@ -86,6 +76,24 @@ const router = createBrowserRouter([
                 path: '/dashboard/reported-products',
                 element: <AdminRoute><ReportedProducts></ReportedProducts></AdminRoute>
             },
+            {
+                path: '/dashboard/my-orders',
+                element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard/my-buyers',
+                element: <SellerRoute><MyBuyers></MyBuyers></SellerRoute>
+            },
+
+            {
+                path: '/dashboard/add-product',
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+            },
+            {
+                path: '/dashboard/my-products',
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
+            },
+
         ]
     },
 ])

@@ -18,7 +18,11 @@ const MyProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://used-phone-server.vercel.app/products?email=${user?.email}`);
+            const res = await fetch(`https://used-phone-server.vercel.app/products?email=${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('usePhonsToken')}`
+                }
+            });
             const data = res.json();
             return data;
         }

@@ -7,7 +7,11 @@ const AllUsers = () => {
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['all-users'],
         queryFn: async () => {
-            const res = await fetch('https://used-phone-server.vercel.app/users');
+            const res = await fetch('https://used-phone-server.vercel.app/users', {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('usePhonsToken')}`
+                }
+            });
             const data = res.json();
             return data
         }

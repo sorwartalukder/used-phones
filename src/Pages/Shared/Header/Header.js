@@ -4,26 +4,31 @@ import PrimaryBtn from '../../../components/AllButton/PrimaryBtn';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Header = () => {
-    const { user, logOut, userRole, setUserRole } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
-            .then(() => { setUserRole(null) })
+            .then(() => { })
             .catch(e => console.error(e))
     }
 
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/my-orders">My Order</Link></li>
-        {userRole === 'Seller' && <>
-            <li><Link to="/add-product">Add A Product</Link></li>
-            <li><Link to="/my-products">My Products</Link></li>
-            <li><Link to="/my-buyers">My Buyer</Link></li>
-        </>}
+        <li tabIndex={0}>
+            <Link
+                className="justify-between">
+                Categories
+                <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+            </Link>
+            <ul className="p-2 text-white bg-slate-900">
+                <li><Link to='category/iphone'>Iphone</Link></li>
+                <li><Link to='category/xiaomi'>Xiaomi</Link></li>
+                <li><Link to='category/oppo'>Oppo</Link></li>
+            </ul>
+        </li>
         <li><Link to="/blogs">blogs</Link></li>
         {
-            userRole === 'Admin' && <li><Link to="/dashboard">Dashboard</Link></li>
+            user && <li><Link to="/dashboard">Dashboard</Link></li>
         }
-
     </React.Fragment>
     return (
         <div className='bg-base-100'>

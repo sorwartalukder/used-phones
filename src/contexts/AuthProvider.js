@@ -8,9 +8,8 @@ export const AuthContext = createContext()
 const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
-    const [loadingUser, setLoadingUser] = useState(true)
     const [user, setUser] = useState(null)
-    const [userRole, setUserRole] = useState(null)
+
 
     const createUser = (email, password) => {
         setLoading(true)
@@ -35,7 +34,6 @@ const AuthProvider = ({ children }) => {
     const updateUserProfile = (userInfo) => {
         return updateProfile(auth.currentUser, userInfo)
     }
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 
@@ -45,20 +43,9 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, [])
 
-    useEffect(() => {
-        fetch(`https://used-phone-server.vercel.app/user?email=${user?.email}`)
-            .then(res => res.json())
-            .then(u => {
-                setUserRole(u.role)
-                setLoadingUser(false)
-            })
-    }, [user?.email])
     const authInfo = {
         user,
         loading,
-        loadingUser,
-        userRole,
-        setUserRole,
         createUser,
         logIn,
         loginWithGoogle,

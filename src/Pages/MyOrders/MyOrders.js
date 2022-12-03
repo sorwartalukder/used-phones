@@ -8,7 +8,11 @@ const MyOrders = () => {
     const { data: myOrders = [], isLoading } = useQuery({
         queryKey: ['my-order'],
         queryFn: async () => {
-            const res = await fetch(`https://used-phone-server.vercel.app/my-orders/${user?.email}`);
+            const res = await fetch(`https://used-phone-server.vercel.app/my-orders/${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('usePhonsToken')}`
+                }
+            });
             const data = res.json();
             return data;
         }
@@ -18,7 +22,7 @@ const MyOrders = () => {
         return <Loading></Loading>
     }
     return (
-        <div className='max-w-[1440px] mx-auto my-16 mb-36 min-h-screen'>
+        <div className=' mb-36 min-h-screen'>
             <h2 className="text-3xl text-center bg-slate-900 text-white py-6">Total Order: {myOrders?.length}</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">

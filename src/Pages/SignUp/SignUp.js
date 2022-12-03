@@ -3,12 +3,20 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
+import useToken from '../../hooks/useToken';
 const SignUp = () => {
-    const { createUser, updateUserProfile, setUserRole } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext)
     const [signUpError, setSignUpError] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate()
     const imageHostKey = process.env.REACT_APP_imgbb_key;
+
+    //jwt
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail);
+    if (token) {
+        navigate('/')
+    }
 
     // create user handler
     const handleUserCreate = data => {
@@ -18,7 +26,6 @@ const SignUp = () => {
             .then((result) => {
                 toast.success('Account Created Successfully.')
                 const user = result.user;
-                setUserRole(data.accountType)
                 //store image
                 const image = data.image[0];
                 const formData = new FormData();
@@ -65,7 +72,7 @@ const SignUp = () => {
             .then(res => res.json())
             .then(data => {
 
-                navigate('/')
+                setCreatedUserEmail(email)
 
             })
     }
@@ -129,7 +136,7 @@ const SignUp = () => {
                             {...register("password", {
                                 required: 'Password is required',
                                 minLength: { value: 6, message: 'Password must be 6 characters long' },
-                                pattern: { value: /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-__+.])/, message: 'Password must be strong' }
+                                pattern: { value: /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-__+.])/, message: 'Password must be strong. one capital letter, one number and one special key word (!@#$%^&*()\-__+.)' }
                             })}
                         />
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
