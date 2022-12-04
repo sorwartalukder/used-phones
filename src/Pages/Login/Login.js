@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
@@ -13,12 +13,17 @@ const Login = () => {
     const [acTypeError, setAcTypeError] = useState('')
     const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate()
+
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
     // jwt 
     const [loginUserEmail, setLoginUserEmail] = useState('')
     const [token] = useToken(loginUserEmail)
-    if (token) {
-        navigate("/");
-    }
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [from, location, token, navigate])
 
 
     //email login handler 
@@ -26,7 +31,7 @@ const Login = () => {
         setLoginError('')
         setAcTypeError('')
         //check user role
-        fetch(`http://localhost:5000/user?email=${data.email}`)
+        fetch(`https://used-phone-server.vercel.app/user?email=${data.email}`)
             .then(res => res.json())
             .then(user => {
                 if (user.role === data.accountType) {
@@ -66,7 +71,7 @@ const Login = () => {
     // user save database function
     const saveUserDatabase = (role, name, email, image) => {
         const user = { role, name, email, image }
-        fetch('http://localhost:5000/users', {
+        fetch('https://used-phone-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
