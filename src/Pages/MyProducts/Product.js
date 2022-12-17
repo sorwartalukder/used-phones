@@ -56,22 +56,20 @@ const Product = ({ product, handleAdvertise, setDeletingProduct }) => {
                         {
                             booked ?
                                 <button
-                                    // onClick={() => handleAdvertise(_id)}
-                                    className="badge badge-outline bg-green-500 px-5 text-white">
+                                    className="badge badge-outline bg-green-500 px-5 text-white hover:shadow-green-500 hover:shadow-md">
                                     Sold
                                 </button>
                                 :
                                 <>{
                                     advertise ?
                                         <button
-                                            // onClick={() => handleAdvertise(_id)}
-                                            className="badge badge-outline px-5 text-red-500">
+                                            className="badge badge-outline px-5 text-red-500 hover:shadow-secondary hover:shadow-md">
                                             Off Advertise
                                         </button>
                                         :
                                         <button
                                             onClick={() => handleAdvertise(_id)}
-                                            className="badge badge-outline px-5 text-blue-900">
+                                            className="badge badge-outline px-5 text-blue-900 hover:shadow-secondary hover:shadow-md">
                                             Advertise
                                         </button>
                                 }</>
@@ -80,7 +78,7 @@ const Product = ({ product, handleAdvertise, setDeletingProduct }) => {
                         <label
                             htmlFor="confirmation-modal"
                             onClick={() => setDeletingProduct(product)}
-                            className="badge badge-outline px-5 text-blue-900 "
+                            className="badge badge-outline px-5 text-blue-900 hover:shadow-secondary hover:shadow-md"
                         >Delete</label>
                     </div>
                 </div>

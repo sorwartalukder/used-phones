@@ -63,7 +63,7 @@ const AddProduct = () => {
                             console.log(result)
                             if (result.acknowledged) {
                                 toast.success(`${user.displayName} product added successfully.`)
-                                // navigate('/my-products')
+                                navigate('/my-products')
                             }
                         })
 

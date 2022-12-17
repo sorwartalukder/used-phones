@@ -110,9 +110,9 @@ const BookNowModal = ({ bookProduct, handleBooking, closeModal }) => {
                                         <div className="modal-action">
                                             <button
                                                 type="submit"
-                                                className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white "
+                                                className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white hover:shadow-secondary hover:shadow-md"
                                             >Submit</button>
-                                            <label onClick={closeModal} className="btn">Cancel</label>
+                                            <label onClick={closeModal} className="btn hover:shadow-secondary hover:shadow-md">Cancel</label>
                                         </div>
                                     </form>
                                 </div>

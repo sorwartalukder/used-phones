@@ -82,14 +82,14 @@ const AllSellers = () => {
                                         seller.verify ?
                                             <label
                                                 onClick={() => handleVerify(seller._id)}
-                                                className="btn btn-sm bg-green-500 text-white"
+                                                className="btn btn-sm bg-green-500 text-white hover:bg-green-500"
                                             >
                                                 Verified </label>
                                             :
 
                                             <label
                                                 onClick={() => handleVerify(seller._id, seller.email)}
-                                                className="btn btn-sm btn-primary bg-gradient-to-r from-primary to-secondary text-white"
+                                                className="btn btn-sm btn-primary bg-gradient-to-r from-primary to-secondary text-white hover:shadow-secondary hover:shadow-md"
                                             >
                                                 Verify</label>
                                     }

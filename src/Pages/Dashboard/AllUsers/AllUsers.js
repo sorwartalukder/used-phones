@@ -34,16 +34,17 @@ const AllUsers = () => {
 
     }
     const handleDelete = (id) => {
-        fetch(`https://used-phone-server.vercel.app/users/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.deletedCount > 0) {
-                    refetch()
-                    toast.success(`deleted successful`)
-                }
-            })
+        toast.error(`This feature code line commented, `)
+        // fetch(`https://used-phone-server.vercel.app/users/${id}`, {
+        //     method: 'DELETE'
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (data.deletedCount > 0) {
+        //             refetch()
+        //             toast.success(`deleted successful`)
+        //         }
+        //     })
 
     }
     if (isLoading) {
@@ -84,13 +85,13 @@ const AllUsers = () => {
                                         user.role === 'Admin' ?
                                             <label
                                                 onClick={() => makeAdmin(user._id)}
-                                                className="btn btn-sm bg-green-500 text-white"
+                                                className="btn btn-sm bg-green-500 text-white hover:bg-green-500 "
                                             >
                                                 Admin</label>
                                             :
                                             <label
                                                 onClick={() => makeAdmin(user._id)}
-                                                className="btn btn-sm btn-primary bg-gradient-to-r from-primary to-secondary text-white"
+                                                className="btn btn-sm btn-primary bg-gradient-to-r from-primary to-secondary text-white hover:shadow-secondary hover:shadow-md"
                                             >
                                                 Make Admin</label>
                                     }
@@ -99,7 +100,7 @@ const AllUsers = () => {
                                 <td>
                                     <label
                                         onClick={() => handleDelete(user._id)}
-                                        className="btn btn-sm btn-error"
+                                        className="btn btn-sm btn-error hover:shadow-error hover:shadow-md"
                                     >
                                         Delete</label>
                                 </td>

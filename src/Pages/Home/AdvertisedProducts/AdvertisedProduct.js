@@ -2,6 +2,7 @@ import React from 'react';
 import { FaCheckCircle, FaUser } from 'react-icons/fa';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import { Link } from 'react-router-dom';
 
 const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
     const { sellerName, sellerImage, userVerify, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = advertisedProduct;
@@ -18,23 +19,25 @@ const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
                 </PhotoProvider>
 
                 <div className="card-body">
-                    <div className='flex items-center'>
-                        <div className="avatar">
-                            <div className="w-8 rounded-full ring ring-primary">
+                    <Link to='/dashboard'>
+                        <div className='flex items-center'>
+                            <div className="avatar">
+                                <div className="w-8 rounded-full ring ring-primary">
+                                    {
+                                        sellerImage ?
+                                            <img src={sellerImage} alt='' />
+                                            :
+                                            <p className='text-4xl'><FaUser /></p>
+                                    }
+                                </div>
                                 {
-                                    sellerImage ?
-                                        <img src={sellerImage} alt='' />
-                                        :
-                                        <p className='text-4xl'><FaUser /></p>
+                                    userVerify && <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
                                 }
-                            </div>
-                            {
-                                userVerify && <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
-                            }
 
+                            </div>
+                            <h4 className='text-xl font-bold ml-1'>{sellerName}</h4>
                         </div>
-                        <h4 className='text-xl font-bold ml-1'>{sellerName}</h4>
-                    </div>
+                    </Link>
                     <p><small>{date} ({time})</small></p>
                     <h2 className="card-title">
                         {productName}
@@ -54,7 +57,7 @@ const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
                         <label
                             htmlFor="book-now"
                             onClick={() => setBookProduct(advertisedProduct)}
-                            className="badge badge-outline px-5 text-blue-900 ">Book now</label>
+                            className="badge badge-outline px-5 text-blue-900 hover:shadow-secondary hover:shadow-md">Book now</label>
                     </div>
                 </div>
             </div>

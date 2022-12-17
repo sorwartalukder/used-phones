@@ -50,7 +50,7 @@ const ReportedProduct = ({ RProduct, handleDelete }) => {
                 <div className="card-actions justify-end">
                     <label
                         onClick={() => handleDelete(_id)}
-                        className="badge badge-outline bg-red-500 px-5 text-white">Delete</label>
+                        className="badge badge-outline bg-red-500 px-5 text-white hover:shadow-red-500 hover:shadow-md">Delete</label>
                 </div>
             </div>
         </div>

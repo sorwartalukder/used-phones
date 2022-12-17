@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Categories = () => {
     const categories = [{ category: 'iphone' }, { category: 'xiaomi' }, { category: 'oppo' }]
 
-    const categoriesClass = ['bg-white text-black', 'bg-black text-white', 'bg-white text-black']
+    const categoriesClass = ['bg-white text-black', 'bg-slate-900 text-white', 'bg-white text-black']
 
     categories.forEach((category, i) => {
         category.class = categoriesClass[i]
@@ -19,7 +19,7 @@ const Categories = () => {
                         key={i}
                         className={`${category.class} flex justify-center items-center`}>
                         <div className="py-8">
-                            <Link to={`/category/${category.category}`} className="font-bold text-2xl">{category.category} <FaLongArrowAltRight className='inline text-blue-700' /></Link>
+                            <Link to={`/category/${category.category}`} className="font-bold text-2xl hover:text-blue-700">{category.category} <FaLongArrowAltRight className='inline text-blue-700' /></Link>
                         </div>
                     </div>)
                 }

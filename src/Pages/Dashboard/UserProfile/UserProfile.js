@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const UserProfile = () => {
@@ -33,9 +32,6 @@ const UserProfile = () => {
                                 <p>Email verify: Not verified</p>
                             }
                             <p>Email: {user?.email}</p>
-
-
-
                             {/* <p className='my-4 '>Check Your information</p>
                         <button className='btn btn-primary  py-2 px-4'>Edit</button> */}
                         </div>
@@ -45,7 +41,7 @@ const UserProfile = () => {
                 </form>
                 <button
                     onClick={handleLogOut}
-                    className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white mt-8">Log out</button>
+                    className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white mt-8 hover:shadow-secondary hover:shadow-md">Log out</button>
             </div>
         </div>
     );
