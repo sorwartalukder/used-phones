@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import Loading from '../../../components/Loading/Loading';
 
 const AllUsers = () => {
@@ -72,11 +73,13 @@ const AllUsers = () => {
                             >
                                 <th>{i + 1}</th>
                                 <td>
-                                    <div className="avatar">
-                                        <div className="w-11 rounded-full">
-                                            <img src={user.image} alt='' />
+                                    <Link to={`/User/Details/${user.email}`}>
+                                        <div className="avatar">
+                                            <div className="w-11 rounded-full hover:shadow-md hover:shadow-primary">
+                                                <img src={user.image} alt='' />
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
@@ -100,7 +103,7 @@ const AllUsers = () => {
                                 <td>
                                     <label
                                         onClick={() => handleDelete(user._id)}
-                                        className="btn btn-sm btn-error hover:shadow-error hover:shadow-md"
+                                        className="btn btn-sm btn-error hover:shadow-red-500 hover:shadow-md"
                                     >
                                         Delete</label>
                                 </td>

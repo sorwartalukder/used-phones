@@ -2,9 +2,10 @@ import React from 'react';
 import { FaCheckCircle, FaUser } from 'react-icons/fa';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import { Link } from 'react-router-dom';
 
 const ReportedProduct = ({ RProduct, handleDelete }) => {
-    const { _id, sellerName, userVerify, sellerImage, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = RProduct;
+    const { _id, sellerName, email, userVerify, sellerImage, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = RProduct;
 
     return (
         <div className="card bg-base-100 border shadow-xl h-full" >
@@ -18,23 +19,25 @@ const ReportedProduct = ({ RProduct, handleDelete }) => {
             </PhotoProvider>
 
             <div className="card-body">
-                <div className='flex items-center'>
-                    <div className="avatar">
-                        <div className="w-8 rounded-full ring ring-primary">
+                <Link to={`/User/Details/${email}`}>
+                    <div className='flex items-center'>
+                        <div className="avatar">
+                            <div className="w-8 rounded-full ring ring-primary hover:ring-blue-700 hover:shadow-md hover:shadow-yellow-500">
+                                {
+                                    sellerImage ?
+                                        <img src={sellerImage} alt='' />
+                                        :
+                                        <p className='text-4xl'><FaUser /></p>
+                                }
+                            </div>
                             {
-                                sellerImage ?
-                                    <img src={sellerImage} alt='' />
-                                    :
-                                    <p className='text-4xl'><FaUser /></p>
+                                userVerify && <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
                             }
-                        </div>
-                        {
-                            userVerify && <p className='-ml-1 text-blue-700'><FaCheckCircle></FaCheckCircle></p>
-                        }
 
+                        </div>
+                        <h4 className='text-xl font-bold ml-1 hover:text-primary'>{sellerName}</h4>
                     </div>
-                    <h4 className='text-xl font-bold ml-1'>{sellerName}</h4>
-                </div>
+                </Link>
                 <p><small>{date} ({time})</small></p>
                 <h2 className="card-title">
                     {productName}

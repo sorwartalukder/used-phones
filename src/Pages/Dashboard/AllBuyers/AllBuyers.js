@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Loading from '../../../components/Loading/Loading';
 
 const AllBuyers = () => {
@@ -38,11 +39,13 @@ const AllBuyers = () => {
                             >
                                 <th>{i + 1}</th>
                                 <td>
-                                    <div className="avatar">
-                                        <div className="w-11 rounded-full">
-                                            <img src={buyer.image} alt='' />
+                                    <Link to={`/User/Details/${buyer.email}`}>
+                                        <div className="avatar">
+                                            <div className="w-11 rounded-full hover:shadow-md hover:shadow-primary">
+                                                <img src={buyer.image} alt='' />
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </td>
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>

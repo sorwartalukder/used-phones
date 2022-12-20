@@ -43,7 +43,6 @@ const ReportedProducts = () => {
                         RProduct={RProduct}
                         handleDelete={handleDelete}
                     >
-
                     </ReportedProduct>)
                 }
             </div>

@@ -134,7 +134,7 @@ const SignUp = () => {
                             {...register("password", {
                                 required: 'Password is required',
                                 minLength: { value: 6, message: 'Password must be 6 characters long' },
-                                pattern: { value: /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-__+.])/, message: 'Password must be strong. one capital letter, one number and one special key word (!@#$%^&*()\-__+.)' }
+                                pattern: { value: /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-__+.])/, message: 'Password must be strong. one capital letter, one number and one special key word (!@#$%^&*()-__+.)' }
                             })}
                         />
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}

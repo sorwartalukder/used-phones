@@ -21,5 +21,5 @@
  * MongoDB
  * Firebase
  * JWT
- * 
+ * npm i --f emailjs-com
 */

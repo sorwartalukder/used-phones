@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import Loading from '../../../components/Loading/Loading';
 
 const AllSellers = () => {
@@ -69,11 +70,13 @@ const AllSellers = () => {
                             >
                                 <th>{i + 1}</th>
                                 <td>
-                                    <div className="avatar">
-                                        <div className="w-11 rounded-full">
-                                            <img src={seller.image} alt='' />
+                                    <Link to={`/User/Details/${seller.email}`}>
+                                        <div className="avatar">
+                                            <div className="w-11 rounded-full hover:shadow-md hover:shadow-primary">
+                                                <img src={seller.image} alt='' />
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </td>
                                 <td>{seller.name}</td>
                                 <td>{seller.email}</td>

@@ -19,7 +19,7 @@ const Categories = () => {
                         key={i}
                         className={`${category.class} flex justify-center items-center`}>
                         <div className="py-8">
-                            <Link to={`/category/${category.category}`} className="font-bold text-2xl hover:text-blue-700">{category.category} <FaLongArrowAltRight className='inline text-blue-700' /></Link>
+                            <Link to={`/category/${category.category}`} className="font-bold text-2xl hover:text-blue-700 hover:shadow-primary hover:shadow-md hover:px-3 py-1 rounded-md">{category.category} <FaLongArrowAltRight className='inline text-blue-700' /></Link>
                         </div>
                     </div>)
                 }

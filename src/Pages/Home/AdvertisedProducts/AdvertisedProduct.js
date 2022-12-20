@@ -5,7 +5,7 @@ import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from 'react-router-dom';
 
 const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
-    const { sellerName, sellerImage, userVerify, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = advertisedProduct;
+    const { sellerName, sellerImage, email, userVerify, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = advertisedProduct;
     return (
         <div>
             <div className="card bg-base-100 border shadow-xl h-full" >
@@ -19,10 +19,10 @@ const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
                 </PhotoProvider>
 
                 <div className="card-body">
-                    <Link to='/dashboard'>
+                    <Link to={`/User/Details/${email}`}>
                         <div className='flex items-center'>
                             <div className="avatar">
-                                <div className="w-8 rounded-full ring ring-primary">
+                                <div className="w-8 rounded-full ring ring-primary  hover:ring-blue-700 hover:shadow-md hover:shadow-yellow-500">
                                     {
                                         sellerImage ?
                                             <img src={sellerImage} alt='' />
@@ -35,7 +35,7 @@ const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
                                 }
 
                             </div>
-                            <h4 className='text-xl font-bold ml-1'>{sellerName}</h4>
+                            <h4 className='text-xl font-bold ml-1 hover:text-primary'>{sellerName}</h4>
                         </div>
                     </Link>
                     <p><small>{date} ({time})</small></p>

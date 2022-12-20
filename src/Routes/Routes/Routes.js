@@ -9,6 +9,7 @@ import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import ReportedProducts from "../../Pages/Dashboard/ReportedProducts/ReportedProducts";
 import UserProfile from "../../Pages/Dashboard/UserProfile/UserProfile";
+import Developers from "../../Pages/Developers/Developers";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import MyBuyers from "../../Pages/MyBuyers/MyBuyers";
@@ -16,6 +17,8 @@ import MyOrders from "../../Pages/MyOrders/MyOrders";
 import MyProducts from "../../Pages/MyProducts/MyProducts";
 import ErrorElement from "../../Pages/Shared/ErrorElement/ErrorElement";
 import SignUp from "../../Pages/SignUp/SignUp";
+import SupportUs from "../../Pages/Support/SupportUs";
+import UserDetails from "../../Pages/Users/UserDetails/UserDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
@@ -41,6 +44,14 @@ const router = createBrowserRouter([
             {
                 path: '/blogs',
                 element: <Blog></Blog>
+            },
+            {
+                path: '/support',
+                element: <SupportUs />
+            },
+            {
+                path: '/developer',
+                element: <Developers />
             },
 
             {
@@ -95,6 +106,10 @@ const router = createBrowserRouter([
             },
 
         ]
+    },
+    {
+        path: '/User/Details/:id',
+        element: <PrivateRoute><UserDetails /></PrivateRoute>
     },
 ])
 

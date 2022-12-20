@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import useUserRole from '../hooks/useUserRole';
 const Dashboard = () => {
     const { user } = useContext(AuthContext)
     const [role] = useUserRole(user?.email)
+    let activeClass = {
+        color: "blue",
+        background: "none",
+    };
     return (
         <div>
             <label tabIndex={2}
@@ -21,40 +25,40 @@ const Dashboard = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-slate-900 text-white text-lg">
                         <li className='mx-auto'>
-                            <Link to="/">Home</Link>
+                            <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to="/">Home</NavLink>
                         </li>
                         <li className='mx-auto'>
-                            <Link to="/dashboard">Profile</Link>
+                            <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to="/dashboard/">Profile</NavLink>
                         </li>
                         <li className='mx-auto'>
-                            <Link to="/dashboard/my-orders">My Order</Link>
+                            <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to="/dashboard/my-orders">My Order</NavLink>
                         </li>
                         {role === 'Seller' &&
                             <>
                                 <li className='mx-auto'>
-                                    <Link to="/dashboard/add-product">Add A Product</Link>
+                                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to="/dashboard/add-product">Add A Product</NavLink>
                                 </li>
                                 <li className='mx-auto'>
-                                    <Link to="/dashboard/my-products">My Products</Link>
+                                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to="/dashboard/my-products">My Products</NavLink>
                                 </li>
                                 <li className='mx-auto'>
-                                    <Link to="/dashboard/my-buyers">My Buyer</Link>
+                                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to="/dashboard/my-buyers">My Buyer</NavLink>
                                 </li>
                             </>
                         }
                         {role === 'Admin' &&
                             <>
                                 <li className='mx-auto'>
-                                    <Link to='/dashboard/all-user'>All User</Link>
+                                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to='/dashboard/all-user'>All User</NavLink>
                                 </li>
                                 <li className='mx-auto'>
-                                    <Link to='/dashboard/all-seller'>All Seller</Link>
+                                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to='/dashboard/all-seller'>All Seller</NavLink>
                                 </li>
                                 <li className='mx-auto'>
-                                    <Link to='/dashboard/all-buyer'>All Buyer</Link>
+                                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to='/dashboard/all-buyer'>All Buyer</NavLink>
                                 </li>
                                 <li className='mx-auto'>
-                                    <Link to='/dashboard/reported-products'>Reported Products</Link>
+                                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to='/dashboard/reported-products'>Reported Products</NavLink>
                                 </li>
                             </>
                         }

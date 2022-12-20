@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import PrimaryBtn from '../../../components/AllButton/PrimaryBtn';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext)
+    let activeClass = {
+        color: "blue",
+        background: "none",
+    };
     const handleLogOut = () => {
         logOut()
             .then(() => { })
@@ -12,22 +16,42 @@ const Header = () => {
     }
 
     const menuItems = <React.Fragment>
-        <li><Link to="/">Home</Link></li>
+        <li>
+            <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to="/">Home</NavLink>
+        </li>
         <li tabIndex={0}>
-            <Link
+            <Link to='/category/iphone'
                 className="justify-between">
                 Categories
                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
             </Link>
             <ul className="p-2 text-white bg-slate-900">
-                <li><Link to='category/iphone'>Iphone</Link></li>
-                <li><Link to='category/xiaomi'>Xiaomi</Link></li>
-                <li><Link to='category/oppo'>Oppo</Link></li>
+                <li>
+                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to='/category/iphone'>Iphone</NavLink>
+                </li>
+                <li>
+                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to='/category/xiaomi'>Xiaomi</NavLink>
+                </li>
+                <li>
+                    <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to='/category/oppo'>Oppo</NavLink>
+                </li>
             </ul>
         </li>
-        <li><Link to="/blogs">blogs</Link></li>
+        <li>
+            <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to="/blogs">blogs</NavLink>
+        </li>
+        <li>
+            <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)}
+                to="/support">Support</NavLink>
+        </li>
+        <li>
+            <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)}
+                to="/developer">Developer</NavLink>
+        </li>
         {
-            user && <li><Link to="/dashboard">Dashboard</Link></li>
+            user && <li>
+                <NavLink style={({ isActive }) => (isActive ? activeClass : undefined)} to="/dashboard">Dashboard</NavLink>
+            </li>
         }
     </React.Fragment>
     return (

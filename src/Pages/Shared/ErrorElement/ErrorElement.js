@@ -28,12 +28,12 @@ const ErrorElement = () => {
                 <p className="text-red-400">{error.statusText || error.message}</p>
                 <h4 className="text-3xl">
                     Please <button
-                        className='btn btn-error'
+                        className='btn btn-primary hover:shadow-md hover:shadow-yellow-500 hover:bg-slate-900'
                         onClick={handleLogOut}> Log Out </button> and log back in.
                 </h4>
                 <button
                     onClick={handleBackHistory}
-                    className="btn btn-primary  my-4">Go To Back</button>
+                    className="btn btn-primary  my-4 hover:shadow-md hover:shadow-yellow-500 hover:bg-slate-900">Go To Back</button>
             </div>
         </div>
     );
