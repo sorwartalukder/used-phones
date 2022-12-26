@@ -67,7 +67,10 @@ I am freedom loving person. I enjoy work. The only difference between me and tho
 <br />
 📧 mdsorwar4039@gmail.com <br />
 ⌨️ 𝘛𝘦𝘹𝘵 / 𝘞𝘩𝘢𝘵𝘴𝘈𝘱𝘱: +880 1742554039 <br />
-📞 𝑪𝒂𝒍𝒍 | 𝒎𝒐𝒃𝒊𝒍𝒆: +880 1742554039
+📞 𝑪𝒂𝒍𝒍 | 𝒎𝒐𝒃𝒊𝒍𝒆: +880 1742554039 <br />
+<a href="https://sorwar-portfolio.web.app/">Developer Portfolio</a> 
+<br />
+<a href="https://drive.google.com/file/d/1_P_F6B3k6TGiXZJTBDMcrGuK4G_xPKko/view?usp=share_link">Download developer resume</a>
 </p>
 <br />
 

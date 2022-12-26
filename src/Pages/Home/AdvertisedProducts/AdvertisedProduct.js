@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const AdvertisedProduct = ({ advertisedProduct, setBookProduct }) => {
     const { sellerName, sellerImage, email, userVerify, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = advertisedProduct;
+    // console.log(advertisedProduct)
     return (
         <div>
             <div className="card bg-base-100 border shadow-xl h-full" >

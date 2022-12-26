@@ -67,47 +67,46 @@ const AllUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            users.map((user, i) => <tr
-                                key={user._id}
-                            >
-                                <th>{i + 1}</th>
-                                <td>
-                                    <Link to={`/User/Details/${user.email}`}>
-                                        <div className="avatar">
-                                            <div className="w-11 rounded-full hover:shadow-md hover:shadow-primary">
-                                                <img src={user.image} alt='' />
-                                            </div>
+                        {users?.length && users.map((user, i) => <tr
+                            key={user._id}
+                        >
+                            <th>{i + 1}</th>
+                            <td>
+                                <Link to={`/User/Details/${user.email}`}>
+                                    <div className="avatar">
+                                        <div className="w-11 rounded-full hover:shadow-md hover:shadow-primary">
+                                            <img src={user.image} alt='' />
                                         </div>
-                                    </Link>
-                                </td>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>
-                                    {
-                                        user.role === 'Admin' ?
-                                            <label
-                                                onClick={() => makeAdmin(user._id)}
-                                                className="btn btn-sm bg-green-500 text-white hover:bg-green-500 "
-                                            >
-                                                Admin</label>
-                                            :
-                                            <label
-                                                onClick={() => makeAdmin(user._id)}
-                                                className="btn btn-sm btn-primary bg-gradient-to-r from-primary to-secondary text-white hover:shadow-secondary hover:shadow-md"
-                                            >
-                                                Make Admin</label>
-                                    }
+                                    </div>
+                                </Link>
+                            </td>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>
+                                {
+                                    user.role === 'Admin' ?
+                                        <label
+                                            onClick={() => makeAdmin(user._id)}
+                                            className="btn btn-sm bg-green-500 text-white hover:bg-green-500 "
+                                        >
+                                            Admin</label>
+                                        :
+                                        <label
+                                            onClick={() => makeAdmin(user._id)}
+                                            className="btn btn-sm btn-primary bg-gradient-to-r from-primary to-secondary text-white hover:shadow-secondary hover:shadow-md"
+                                        >
+                                            Make Admin</label>
+                                }
 
-                                </td>
-                                <td>
-                                    <label
-                                        onClick={() => handleDelete(user._id)}
-                                        className="btn btn-sm btn-error hover:shadow-red-500 hover:shadow-md"
-                                    >
-                                        Delete</label>
-                                </td>
-                            </tr>)
+                            </td>
+                            <td>
+                                <label
+                                    onClick={() => handleDelete(user._id)}
+                                    className="btn btn-sm btn-error hover:shadow-red-500 hover:shadow-md"
+                                >
+                                    Delete</label>
+                            </td>
+                        </tr>)
                         }
                     </tbody>
                 </table>

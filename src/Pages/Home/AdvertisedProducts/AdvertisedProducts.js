@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import Loading from '../../../components/Loading/Loading';
 import BookNowModal from '../../AllProducts/BookNowModal/BookNowModal';
@@ -7,20 +7,16 @@ import AdvertisedProduct from './AdvertisedProduct';
 
 const AdvertisedProducts = () => {
     const [bookProduct, setBookProduct] = useState(null)
+    const [search, setSearch] = useState('');
+    const searchRef = useRef();
     const { data: advertisedProducts = [], isLoading, refetch } = useQuery({
-        queryKey: ['advertised-products'],
+        queryKey: ['advertised-products', search],
         queryFn: async () => {
-            const res = await fetch('https://used-phone-server.vercel.app/products/advertise', {
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('usePhonsToken')}`
-                }
-            });
+            const res = await fetch(`http://localhost:5000/products/advertise?search=${search}`);
             const data = res.json();
             return data
         }
     })
-
-    //booking modal close handle
     const closeModal = () => {
         setBookProduct(null);
     }
@@ -78,7 +74,10 @@ const AdvertisedProducts = () => {
                 }
             })
     }
-
+    // handle search
+    const handleSearch = () => {
+        setSearch(searchRef.current.value.replaceAll('pro', ''))
+    }
     // products loading spinner 
     if (isLoading) {
         return <Loading></Loading>
@@ -86,9 +85,19 @@ const AdvertisedProducts = () => {
     return (
         <div className='max-w-[1440px] mx-auto my-16'>
             {
-                advertisedProducts.length ? <h2 className='text-center font-bold text-4xl my-6'>Advertised Products</h2>
-                    :
-                    ''
+
+                <div className='my-6 flex justify-between items-center'>
+                    <h2 className='font-bold text-4xl'>Advertised Products</h2>
+                    <div>
+                        <input ref={searchRef} type="text" placeholder="Type here" className="input input-bordered input-primary input-sm max-w-xs" />
+                        <button
+                            onClick={handleSearch}
+                            type="submit"
+                            className="ml-3 btn btn-sm btn-primary bg-gradient-to-r from-primary to-secondary text-white hover:shadow-secondary hover:shadow-md"
+                        >Search</button>
+                    </div>
+                </div>
+
             }
 
 

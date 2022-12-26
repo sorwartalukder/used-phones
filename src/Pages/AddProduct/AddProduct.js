@@ -39,8 +39,8 @@ const AddProduct = () => {
                         email: user.email,
                         productName,
                         image: imgData.data.url,
-                        resalePrice,
-                        originalPrice,
+                        resalePrice: parseFloat(resalePrice.replaceAll(',', '')),
+                        originalPrice: parseFloat(originalPrice.replaceAll(',', '')),
                         yearOfPurchase,
                         category,
                         condition,
@@ -51,6 +51,7 @@ const AddProduct = () => {
                         time,
                         date
                     }
+                    console.log(product)
                     fetch('https://used-phone-server.vercel.app/products', {
                         method: 'POST',
                         headers: {
@@ -63,7 +64,7 @@ const AddProduct = () => {
                             console.log(result)
                             if (result.acknowledged) {
                                 toast.success(`${user.displayName} product added successfully.`)
-                                navigate('/my-products')
+                                navigate('/dashboard/my-products')
                             }
                         })
 

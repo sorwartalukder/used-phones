@@ -5,7 +5,7 @@ import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from 'react-router-dom';
 const CategoryProduct = ({ product, setBookProduct, handleReport }) => {
     const { _id, sellerName, email, userVerify, sellerImage, productName, image, originalPrice, phone, location, condition, date, description, resalePrice, yearOfPurchase, time } = product;
-    // console.log(email)
+    // console.log(product)
 
     return (
         <div className="card bg-base-100 border shadow-xl h-full" >

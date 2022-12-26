@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 const MyBuyers = () => {
     const { user } = useContext(AuthContext)
     const { data: myBuyers = [], isLoading } = useQuery({
-        queryKey: ['my-order'],
+        queryKey: ['my-order', user?.email],
         queryFn: async () => {
             const res = await fetch(`https://used-phone-server.vercel.app/my-buyer/${user?.email}`, {
                 headers: {
@@ -36,7 +36,7 @@ const MyBuyers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
+                        {myBuyers?.length &&
                             myBuyers.map((buyer, i) => <tr
                                 key={buyer._id}
                                 className="hover"
