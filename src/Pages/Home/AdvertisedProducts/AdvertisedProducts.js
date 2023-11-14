@@ -12,7 +12,7 @@ const AdvertisedProducts = () => {
     const { data: advertisedProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['advertised-products', search],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products/advertise?search=${search}`);
+            const res = await fetch(`https://used-phone-server.vercel.app/products/advertise?search=${search}`);
             const data = res.json();
             return data
         }

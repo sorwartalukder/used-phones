@@ -16,7 +16,7 @@ const CategoryProducts = () => {
     const { data: categoryProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['categoryProducts', categoryName?.category, location],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/category/products/${categoryName?.category}?location=${location}`, {
+            const res = await fetch(`https://used-phone-server.vercel.app/category/products/${categoryName?.category}?location=${location}`, {
                 headers: {
                     //jwt
                     authorization: `bearer ${localStorage.getItem('usePhonsToken')}`
@@ -26,6 +26,8 @@ const CategoryProducts = () => {
             return data
         }
     })
+    console.log(categoryProducts)
+    console.log(categoryName)
 
     //booking modal close handle
     const closeModal = () => {
@@ -112,9 +114,9 @@ const CategoryProducts = () => {
     }
     const locations = ['Dhaka', 'Chattogram', 'Sylhet', 'Rajshahi', 'Rangpur', 'Mymensingh', 'Barishal', 'Khulna']
     return (
-        <div className='max-w-[1440px] min-h-screen mx-auto my-14'>
-            <div className='mt-8 py-4 flex justify-between items-center'>
-                <h1 className=' text-4xl'>Total Products: {categoryProducts?.length}</h1>
+        <div className='max-w-[1440px] min-h-screen mx-auto mb-14'>
+            <div className='py-4 flex justify-between items-center px-4'>
+                <h1 className=' text-3xl'>Total Products: {categoryProducts?.length}</h1>
                 <div>
                     {
                         filter ?
@@ -144,7 +146,7 @@ const CategoryProducts = () => {
                             <img src={filterImg}
                                 onClick={() => setFilter(!filter)}
                                 className='hover:shadow-md hover:shadow-primary hover:rounded-sm'
-                                width="40" height="40"
+                                width="30" height="30"
                                 alt="filter" />
                     }
                 </div>
